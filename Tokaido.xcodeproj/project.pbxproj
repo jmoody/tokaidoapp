@@ -40,7 +40,6 @@
 		C545BDBB178346D900DACCBD /* TKDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = C545BDBA178346D900DACCBD /* TKDTask.m */; };
 		C545BDBC178346D900DACCBD /* TKDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = C545BDBA178346D900DACCBD /* TKDTask.m */; };
 		C5E21F8317882F94002B24B5 /* TKDAppViewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E21F8217882F94002B24B5 /* TKDAppViewItemView.m */; };
-		CD1FCB88169D066C00FB7E36 /* Tokaido.icns in Resources */ = {isa = PBXBuildFile; fileRef = CD1FCB87169D066C00FB7E36 /* Tokaido.icns */; };
 		CD1FCB8C169D0DCF00FB7E36 /* Green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1FCB89169D0DCE00FB7E36 /* Green@2x.png */; };
 		CD1FCB8D169D0DCF00FB7E36 /* Red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1FCB8A169D0DCF00FB7E36 /* Red@2x.png */; };
 		CD1FCB8E169D0DCF00FB7E36 /* Yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD1FCB8B169D0DCF00FB7E36 /* Yellow@2x.png */; };
@@ -57,6 +56,7 @@
 		CD8285DF1655B7DF000CB252 /* TKDAppCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8285DD1655B670000CB252 /* TKDAppCollectionView.m */; };
 		CDA9B856172B42E30027E78B /* llvm-gcc-4.2.zip in Resources */ = {isa = PBXBuildFile; fileRef = CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */; };
 		CDB963F617288901002A8A43 /* tokaido-gems.zip in Resources */ = {isa = PBXBuildFile; fileRef = CDB963F517288901002A8A43 /* tokaido-gems.zip */; };
+		F5ED7EA517EF277700F492BF /* Calabash.icns in Resources */ = {isa = PBXBuildFile; fileRef = F5ED7EA417EF277700F492BF /* Calabash.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +132,6 @@
 		C545BDBA178346D900DACCBD /* TKDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDTask.m; sourceTree = "<group>"; };
 		C5E21F8117882F94002B24B5 /* TKDAppViewItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDAppViewItemView.h; sourceTree = "<group>"; };
 		C5E21F8217882F94002B24B5 /* TKDAppViewItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDAppViewItemView.m; sourceTree = "<group>"; };
-		CD1FCB87169D066C00FB7E36 /* Tokaido.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Tokaido.icns; sourceTree = SOURCE_ROOT; };
 		CD1FCB89169D0DCE00FB7E36 /* Green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Green@2x.png"; sourceTree = "<group>"; };
 		CD1FCB8A169D0DCF00FB7E36 /* Red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Red@2x.png"; sourceTree = "<group>"; };
 		CD1FCB8B169D0DCF00FB7E36 /* Yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yellow@2x.png"; sourceTree = "<group>"; };
@@ -154,6 +153,7 @@
 		CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "llvm-gcc-4.2.zip"; sourceTree = "<group>"; };
 		CDB963F517288901002A8A43 /* tokaido-gems.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "tokaido-gems.zip"; sourceTree = "<group>"; };
 		E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		F5ED7EA417EF277700F492BF /* Calabash.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Calabash.icns; path = ../Calabash.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,7 +353,7 @@
 		CD1FCB86169D047B00FB7E36 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
-				CD1FCB87169D066C00FB7E36 /* Tokaido.icns */,
+				F5ED7EA417EF277700F492BF /* Calabash.icns */,
 			);
 			name = Icon;
 			sourceTree = "<group>";
@@ -374,9 +374,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3AD6930616373C9F005AF81E /* Tokaido */ = {
+		3AD6930616373C9F005AF81E /* Calabash */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3AD6933916373C9F005AF81E /* Build configuration list for PBXNativeTarget "Tokaido" */;
+			buildConfigurationList = 3AD6933916373C9F005AF81E /* Build configuration list for PBXNativeTarget "Calabash" */;
 			buildPhases = (
 				3AD6930316373C9F005AF81E /* Sources */,
 				3AD6930416373C9F005AF81E /* Frameworks */,
@@ -388,7 +388,7 @@
 			);
 			dependencies = (
 			);
-			name = Tokaido;
+			name = Calabash;
 			productName = Tokaido;
 			productReference = 3AD6930716373C9F005AF81E /* Tokaido.app */;
 			productType = "com.apple.product-type.application";
@@ -434,7 +434,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3AD6930616373C9F005AF81E /* Tokaido */,
+				3AD6930616373C9F005AF81E /* Calabash */,
 				3AD6932716373C9F005AF81E /* TokaidoTests */,
 			);
 		};
@@ -459,11 +459,11 @@
 				CD8285AD16559D96000CB252 /* Green.png in Resources */,
 				CD8285AE16559D96000CB252 /* Red.png in Resources */,
 				CD8285B11655A696000CB252 /* down_arrow.png in Resources */,
-				CD1FCB88169D066C00FB7E36 /* Tokaido.icns in Resources */,
 				CD1FCB8C169D0DCF00FB7E36 /* Green@2x.png in Resources */,
 				CD1FCB8D169D0DCF00FB7E36 /* Red@2x.png in Resources */,
 				08783A2A1784A9AC0071AC1C /* uninstall.sh in Resources */,
 				CD1FCB8E169D0DCF00FB7E36 /* Yellow@2x.png in Resources */,
+				F5ED7EA517EF277700F492BF /* Calabash.icns in Resources */,
 				CD5A8934170B84EA00217D8A /* Yellow.png in Resources */,
 				CD5A8982171380E500217D8A /* EditAppWindow.xib in Resources */,
 				CD5A898E171CC96000217D8A /* tokaido-bootstrap.zip in Resources */,
@@ -548,7 +548,7 @@
 /* Begin PBXTargetDependency section */
 		3AD6932D16373C9F005AF81E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3AD6930616373C9F005AF81E /* Tokaido */;
+			target = 3AD6930616373C9F005AF81E /* Calabash */;
 			targetProxy = 3AD6932C16373C9F005AF81E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -644,7 +644,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -659,7 +659,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -712,7 +712,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3AD6933916373C9F005AF81E /* Build configuration list for PBXNativeTarget "Tokaido" */ = {
+		3AD6933916373C9F005AF81E /* Build configuration list for PBXNativeTarget "Calabash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3AD6933A16373C9F005AF81E /* Debug */,
