@@ -29,31 +29,11 @@ fi
 export PATH=$tmp/bootstrap-gems/bin:$PATH
 
 zips="$tmp/zips"
-sqlite3="$zips/sqlite-autoconf-3070500"
 
 mkdir -p $zips
 cp Tokaido/Gemfile tmp/zips/Gemfile
 
 cd $zips
-
-if [ -d $sqlite3 ]
-then
-  echo "SQLite3 already built"
-else
-  echo "Downloading and extracting SQLite3"
-  curl -O http://www.sqlite.org/sqlite-autoconf-3070500.tar.gz
-  tar -xf sqlite-autoconf-3070500.tar.gz
-
-  echo "Building static SQLite3"
-  cd $sqlite3
-
-  ./configure --disable-shared --enable-static
-  make
-
-  cd ..
-fi
-
-bundle config --local build.sqlite3 --with-sqlite3-lib=$sqlite3/.libs --with-sqlite3-include=$sqlite3
 
 echo "Removing existing GEM_HOME to rebuild it"
 rm -rf gem_home

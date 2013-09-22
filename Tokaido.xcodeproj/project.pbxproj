@@ -644,6 +644,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -658,6 +659,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
