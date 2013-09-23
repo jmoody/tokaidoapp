@@ -45,6 +45,7 @@
 
 - (void)activate
 {
+    /*
     TKDApp *app = self.representedObject;
     
     switch (app.state) {
@@ -63,6 +64,7 @@
         default:
             break;
     }
+     */
 }
 
 - (void)configureActivatedMenuItem
@@ -138,12 +140,16 @@
 
 - (void)editApp
 {
+    /*
     [self.tokaidoController showEditWindowForApp:self.representedObject];
+     */
 }
 
 - (void)removeApp
 {
+    /*
     [self.tokaidoController removeApp:self.representedObject];
+     */
 }
 
 - (void)setSelected:(BOOL)selected

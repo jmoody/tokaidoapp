@@ -126,13 +126,9 @@ typedef enum : u_int16_t {
 
 #pragma mark App Settings
 
-- (void)saveAppSettings
+- (void) saveAppSettings
 {
-    NSString *appSettingsPath = [[TKDAppDelegate tokaidoAppSupportDirectory] stringByAppendingPathComponent:@"AppSettings"];
-    BOOL success = [NSKeyedArchiver archiveRootObject:self.tokaidoController.apps toFile:appSettingsPath];
-    if (!success) {
-        NSLog(@"ERROR: Couldn't save app settings.");
-    }
+
 }
 
 #pragma mark Helper Methods
