@@ -10,11 +10,11 @@
 		</data>
 		<key>Resources/Calabash.icns</key>
 		<data>
-		8ViPttmkWfeLESXAbCrDQzNn2WM=
+		EykFC1NbK5I158a5SxAImYZ3CS4=
 		</data>
 		<key>Resources/EditAppWindow.nib</key>
 		<data>
-		95gViC75l1hko1ghvbh9JPR2zLg=
+		wgMBd8R40ePmNNNVPn3vtApBhJU=
 		</data>
 		<key>Resources/Green.tiff</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Resources/SetupTokaido.sh</key>
 		<data>
-		uPg1xnGW4VWFq8C04/TufmxBT2o=
+		fDU28Mv6chq4qI/QuPIsF2qmJHs=
 		</data>
 		<key>Resources/TKAppIconBackground.tiff</key>
 		<data>
@@ -47,6 +47,10 @@
 		<key>Resources/Yellow.tiff</key>
 		<data>
 		IXUOLfJZRsvbW5yVdGm0/UEndk0=
+		</data>
+		<key>Resources/calabash-128x128.tiff</key>
+		<data>
+		Kz0OX1rFgq6ULIZYgqzWTzPF5iY=
 		</data>
 		<key>Resources/down_arrow.png</key>
 		<data>
@@ -74,7 +78,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			uLBndl1tykqefqywGi3vsQiVYok=
+			mXQfx1BFD5fwtYKIPRgjQQ9j3Lc=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -101,7 +105,7 @@
 		</data>
 		<key>Resources/tokaido-gems.zip</key>
 		<data>
-		TpMNzuLTTGnqAKDRQmVIDwwWALo=
+		I6RKU0xGY65DRq1H6LGvfsGuQJE=
 		</data>
 		<key>Resources/uninstall.sh</key>
 		<data>

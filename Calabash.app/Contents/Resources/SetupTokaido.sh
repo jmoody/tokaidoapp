@@ -8,9 +8,13 @@
 
 clear
 
-BIN="$HOME/.calabash/bin"
+# tokaido sandbox path => /var/blah/blah/Calabash-<UUID>
+# tokaido path => path to the ruby eg. /var/blah/blah/Calabash-XXXX/Ruby
+# tokaido app dir => where to open the shell - always NSUserHomeDirectory
 
-export TOKAIDO_GEM_HOME=$HOME/.calabash/Gems
+BIN=$TOKAIDO_SANDBOX_PATH/bin
+
+export TOKAIDO_GEM_HOME=$TOKAIDO_SANDBOX_PATH/Gems
 export GEM_HOME=$TOKAIDO_GEM_HOME
 export GEM_PATH=$TOKAIDO_GEM_HOME
 export PATH=$BIN:$TOKAIDO_PATH:$GEM_HOME/bin:$PATH

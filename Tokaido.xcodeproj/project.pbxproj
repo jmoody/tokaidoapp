@@ -141,7 +141,7 @@
 		3AD6933416373C9F005AF81E /* TokaidoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokaidoTests.h; sourceTree = "<group>"; };
 		3AD6933516373C9F005AF81E /* TokaidoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokaidoTests.m; sourceTree = "<group>"; };
 		3AD693431637436E005AF81E /* TKDTokaidoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDTokaidoController.h; sourceTree = "<group>"; };
-		3AD693441637436E005AF81E /* TKDTokaidoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDTokaidoController.m; sourceTree = "<group>"; };
+		3AD693441637436E005AF81E /* TKDTokaidoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDTokaidoController.m; sourceTree = "<group>"; tabWidth = 4; };
 		3AD69348163746B7005AF81E /* SystemEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemEvents.h; sourceTree = "<group>"; };
 		3AD69349163746B7005AF81E /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
 		3AD6934A16374795005AF81E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -836,6 +836,7 @@
 				F5D1B1B217F0C04C00A180A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

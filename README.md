@@ -31,6 +31,8 @@ i don't know how to do this.
 3. follow steps 3 and 4 in Setup
 4. build and run the Calabash scheme in Xcode
 
+**IMPORTANT** it is probably a great idea to repeat steps 2 - 3 above when you change branches
+
 ### changing the About view
 
 i punted on this.  you can edit the `Tokaido/en.lproj/Credits.rtf`  to change the content.

@@ -135,8 +135,14 @@ typedef enum : u_int16_t {
         [self unzipFileAtPath:[TKDAppDelegate tokaidoBundledGemsFile]
               inDirectoryPath:[TKDAppDelegate tokaidoAppSupportDirectory]];
     }
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:TKDDidFinishInstallingSandboxNotification object:nil];
+    
+//    double delayInSeconds = 10.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:TKDDidFinishInstallingSandboxNotification object:nil];
+
+//    });
 }
 
 

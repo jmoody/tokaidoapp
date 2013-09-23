@@ -47,17 +47,17 @@ NSString *LjsUnixOperationTaskErrorDomain = @"com.littlejoysoftware.Ljs Unix Ope
     NSTask *tTask = [[NSTask alloc] init];
     self.task = tTask;
     
-    [self.task setLaunchPath:aLaunchPath];
-    [self.task setArguments:aLaunchArgs];
+    [tTask setLaunchPath:aLaunchPath];
+    [tTask setArguments:aLaunchArgs];
     NSPipe *tPipe;
     tPipe = [[NSPipe alloc] init];
-    [self.task setStandardOutput:tPipe];
+    [tTask setStandardOutput:tPipe];
     tPipe = [[NSPipe alloc] init];
-    [self.task setStandardError:tPipe];
+    [tTask setStandardError:tPipe];
     
     // might consider making these ivars for memory reasons
-    NSFileHandle *stdOut = [[self.task standardOutput] fileHandleForReading];
-    NSFileHandle *stdErr = [[self.task standardError] fileHandleForReading];
+    NSFileHandle *stdOut = [[tTask standardOutput] fileHandleForReading];
+    NSFileHandle *stdErr = [[tTask standardError] fileHandleForReading];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self
@@ -204,10 +204,6 @@ NSString *LjsUnixOperationTaskErrorDomain = @"com.littlejoysoftware.Ljs Unix Ope
   @autoreleasepool {
     if (![self isCancelled]) {
     
-      // I do not think this is necessary
-      NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-      [self.task setEnvironment:environment];
-      
       NSError *launchError = nil;
       NSString *outputString = nil;
       NSString *errorString = nil;

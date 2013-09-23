@@ -25,7 +25,8 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 
 - (void) launchVersionOperationWithPath:(NSString *) aLaunchPath
                              identifier:(NSString *) aIdentifer
-                              arguments:(NSArray *) aArgs;
+                              arguments:(NSArray *) aArgs
+                            environment:(NSDictionary *) aEnvironment;
 @end
 
 @implementation TKDTokaidoController
@@ -46,7 +47,6 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
     return self;
 }
 
-
 - (NSOperationQueue *) opqueue {
     if (_opqueue != nil) { return _opqueue; }
     _opqueue = [[NSOperationQueue alloc] init];
@@ -57,45 +57,73 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
     NSLog(@"DEBUG: received sandbox did finish install notification");
     [[NSNotificationCenter defaultCenter]
      removeObserver:self name:TKDDidFinishInstallingSandboxNotification object:nil];
-    
-    NSString *gemDir = [TKDAppDelegate tokaidoInstalledGemsDirectory];
-    NSString *gemBin = [gemDir stringByAppendingPathComponent:@"/bin"];
-    
-    NSString *cal_ios = [gemBin stringByAppendingPathComponent:@"/calabash-ios"];
-    NSString *cal_and = [gemBin stringByAppendingPathComponent:@"/calabash-android"];
-    NSArray *launchArgs = @[@"version"];
-    
-    [self launchVersionOperationWithPath:cal_ios identifier:kCalabashIOSVersion arguments:launchArgs];
-    [self launchVersionOperationWithPath:cal_and identifier:kCalabashAndroidVersion arguments:launchArgs];
 
     NSString *rubyDir = [TKDAppDelegate tokaidoInstalledRubiesDirectory];
     NSString *rubySub = [NSString stringWithFormat:@"%@/bin/ruby", kTKDInstalledRubyVersion];
     NSString *rubyPath = [rubyDir stringByAppendingPathComponent:rubySub];
-    launchArgs = @[@"--version"];
-    [self launchVersionOperationWithPath:rubyPath identifier:kCalabashRubyVersion arguments:launchArgs];
+    NSArray *launchArgs = @[@"--version"];
+    [self launchVersionOperationWithPath:rubyPath
+                              identifier:kCalabashRubyVersion
+                               arguments:launchArgs
+                             environment:nil];
+
+
+    NSString *gemDir = [TKDAppDelegate tokaidoInstalledGemsDirectory];
+    NSString *gemBin = [gemDir stringByAppendingPathComponent:@"bin"];
+    
+    NSString *cal_ios = [gemBin stringByAppendingPathComponent:@"calabash-ios"];
+    NSString *cal_and = [gemBin stringByAppendingPathComponent:@"calabash-android"];
+    NSLog(@"cal ios = %@", cal_ios);
+    NSLog(@"cal and = %@", cal_and);
+    
+    NSDictionary *env = @{@"GEM_HOME" : gemDir,
+                          @"GEM_PATH" : gemDir,
+                          @"RUBYPATH" : rubyPath,
+                          @"HOME" : NSHomeDirectory()};
+    
+    [self launchVersionOperationWithPath:rubyPath
+                              identifier:kCalabashIOSVersion
+                               arguments:@[cal_ios, @"version"]
+                             environment:env];
+    
+    [self launchVersionOperationWithPath:rubyPath
+                              identifier:kCalabashAndroidVersion
+                               arguments:@[cal_and, @"version"]
+                             environment:env];
+
+    
+    [self.buttonStartTerminal setEnabled:YES];
 }
 
 
 - (void) launchVersionOperationWithPath:(NSString *) aLaunchPath
                              identifier:(NSString *) aIdentifer
-                              arguments:(NSArray *) aArgs {
+                              arguments:(NSArray *) aArgs
+                            environment:(NSDictionary *) aEnvironment {
     LjsUnixOperation *operation = [[LjsUnixOperation alloc]
                                    initWithLaunchPath:aLaunchPath
                                    launchArgs:aArgs
                                    commonName:aIdentifer
                                    callbackDelegate:self];
+    if (aEnvironment) { operation.task.environment = aEnvironment; }
+    
     [self.opqueue addOperation:operation];
 }
 
 #pragma mark - Ljs Unix Operation Callback Delegate
 
 - (void) operationCompletedWithName:(NSString *)aName result:(LjsUnixOperationResult *)aResult {
+    NSLog(@"DEBUG: received '%@'", aResult);
+    
     NSTextField *textField = nil;
     if ([kCalabashIOSVersion isEqualToString:aName]) {
+        NSLog(@"DEBUG: reveived IOS version: '%@'", [aResult stdOutput]);
         textField = [self labelIOSVersion];
     } else if ([kCalabashAndroidVersion isEqualToString:aName]) {
+        NSLog(@"DEBUG: reveived Android version: '%@'", [aResult stdOutput]);
         textField = [self labelAndroidVersion];
     } else if ([kCalabashRubyVersion isEqualToString:aName]) {
+        NSLog(@"DEBUG: reveived Ruby version: '%@'", [aResult stdOutput]);
         textField = [self labelRubyVersion];
     } else {
         NSLog(@"ERROR: did not recognize operation with name: '%@'", aName);
@@ -135,6 +163,10 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 
 - (void) awakeFromNib {
     NSButton *startTerminal = [self buttonStartTerminal];
+    // will enable once the sandbox is installed (see the handle did finish notification)
+    [startTerminal setEnabled:NO];
+    
+  
     NSRect stf = startTerminal.frame;
     
     NSImage *image = [NSImage imageNamed:@"calabash-128x128.tiff"];
