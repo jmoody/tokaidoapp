@@ -28,19 +28,36 @@ You should then be able to build and run Tokaido in Xcode.
 4. launched the app (1st launch failed, but the second did not - could not reproduce)
 5. opened a shell using the Calabash.app
 
-found that the ruby version was 2.0 and that i could execute `calabash-ios console`
+* found that the ruby version was 2.0 
+* i could execute `calabash-ios console`
+* i could run the cucumber tests on the calabash-ios-example    
 
-#### rbenv and the PATH
+#### things that can go wrong
 
-if you have rbenv installed, the shims are a bit of problem.  when using rbenv PATH variable contains references to the various gem binaries, so a:
+if the shell that pops up cannot find `cucumber` for example. 
 
-`$ which calabash-ios ==> /Users/moody/.rbenv/shims/calabash-ios`
+* delete your `~/.calabash` directory (was `~/.tokaido`)
+* launch a new shell and try again
 
-in the shell opened by the Calabash.app will point to the wrong binary.
+check the PATH variable
 
-the solution is to copy the calabash binaries into the `~/.tokaido/bin` directory.
+`echo $PATH`
 
-this is probably easy to accomplish, but i didn't bother because i wanted to make sure i was on the right track.
+#### rbenv/rvm and the PATH
+
+if you have rbenv or rvm install, i rewrite the PATH variable for the shell and exclude the .rbenv and .rvm directories.
+
+#### bundler and global ~/.bundle/config
+
+i use bundler to pin various projects to specific calabash-cucumber/calabash-android revisions.
+
+```
+# be is aliased to 'bundle exec'
+$ be cucumber --tags @checkin
+Local override for calabash-ios at /Users/moody/git/calabash-ios is using branch 0.9.x but Gemfile specifies 0.9.x-riseup-branch
+```
+
+the solution?  do not run with `bundle exec`
 
 #### Converting the Calabash.app into something branded and useful
 

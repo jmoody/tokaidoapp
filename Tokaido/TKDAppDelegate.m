@@ -469,14 +469,16 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
 
 + (NSString *)tokaidoAppSupportDirectory;
 {
+    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *applicationSupportDirectory = [paths objectAtIndex:0];
-    NSString *tokaidoDirectory = [NSString stringWithFormat:@"%@/Tokaido", applicationSupportDirectory];
+    NSString *tokaidoDirectory = [NSString stringWithFormat:@"%@/%@", applicationSupportDirectory,
+                                  appName];
     [self createDirectoryAtPathIfNonExistant:tokaidoDirectory];
 
     NSString *homeDirectory = NSHomeDirectory();
-    NSString *tokaidoDirectorySymlink = [homeDirectory stringByAppendingPathComponent:@"/.tokaido"];
+    NSString *tokaidoDirectorySymlink = [homeDirectory stringByAppendingPathComponent:@"/.calabash"];
     
     NSFileManager *fm = [NSFileManager defaultManager];
     if (![fm fileExistsAtPath:tokaidoDirectorySymlink]) {

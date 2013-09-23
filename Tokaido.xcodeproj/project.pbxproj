@@ -96,7 +96,7 @@
 		3A19ECE81640734F0035ABA2 /* TKAppIconBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TKAppIconBackground@2x.png"; sourceTree = "<group>"; };
 		3A19ECEB1640777E0035ABA2 /* TKIconRuby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TKIconRuby.png; sourceTree = "<group>"; };
 		3A19ECEC1640777E0035ABA2 /* TKIconRuby@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TKIconRuby@2x.png"; sourceTree = "<group>"; };
-		3AD6930716373C9F005AF81E /* Tokaido.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tokaido.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AD6930716373C9F005AF81E /* Tokaido.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Tokaido.app; path = Calabash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD6930B16373C9F005AF81E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3AD6930E16373C9F005AF81E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		3AD6930F16373C9F005AF81E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -190,6 +190,7 @@
 				3AD6930A16373C9F005AF81E /* Frameworks */,
 				3AD6930816373C9F005AF81E /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
 		};
 		3AD6930816373C9F005AF81E /* Products */ = {
