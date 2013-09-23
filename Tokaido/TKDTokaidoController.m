@@ -13,6 +13,7 @@
 #import "LjsUnixOperation.h"
 #import "LjsUnixOperationResult.h"
 
+
 static NSString *const kCalabashIOSVersion = @"com.xamarin.Calabash - calabash iOS version";
 static NSString *const kCalabashAndroidVersion = @"com.xamarin.Calabash - calabash Android version";
 static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash Ruby version";
@@ -20,6 +21,8 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 @interface TKDTokaidoController () <LjsUnixOperationCallbackDelegate>
 
 @property (nonatomic, strong, readonly) NSOperationQueue *opqueue;
+@property (nonatomic, strong, readonly) NSView *mask;
+@property (nonatomic, strong, readonly) NSProgressIndicator *progressIndicator;
 
 - (void) handleDidFinishInstallingSandboxNotification:(NSNotification *) aNotification;
 
@@ -34,6 +37,8 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 #pragma mark - Memory Management
 
 @synthesize opqueue = _opqueue;
+@synthesize mask = _mask;
+@synthesize progressIndicator = _progressIndicator;
 
 - (id) initWithWindow:(NSWindow *)window {
     self = [super initWithWindow:window];
@@ -73,8 +78,7 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
     
     NSString *cal_ios = [gemBin stringByAppendingPathComponent:@"calabash-ios"];
     NSString *cal_and = [gemBin stringByAppendingPathComponent:@"calabash-android"];
-    NSLog(@"cal ios = %@", cal_ios);
-    NSLog(@"cal and = %@", cal_and);
+  
     
     NSDictionary *env = @{@"GEM_HOME" : gemDir,
                           @"GEM_PATH" : gemDir,
@@ -91,8 +95,23 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
                                arguments:@[cal_and, @"version"]
                              environment:env];
 
-    
-    [self.buttonStartTerminal setEnabled:YES];
+    // punting on this
+    // we want to wait for the gems and ruby to report the versions
+    // with some effort i could make this based the return of the NSTasks
+    // but then i would have to spend time handing NSTask errors...
+    // better to let the user touch the button and have the app blow up if it
+    // needs to
+    __weak typeof(self) wself = self;
+    double delayInSeconds = 1.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSProgressIndicator *pi = [wself progressIndicator];
+        [pi stopAnimation:nil];
+        NSView *mask = [wself mask];
+        [mask removeFromSuperview];
+        NSButton *stb = [wself buttonStartTerminal];
+        [stb setEnabled:YES];
+    });
 }
 
 
@@ -113,8 +132,7 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 #pragma mark - Ljs Unix Operation Callback Delegate
 
 - (void) operationCompletedWithName:(NSString *)aName result:(LjsUnixOperationResult *)aResult {
-    NSLog(@"DEBUG: received '%@'", aResult);
-    
+  
     NSTextField *textField = nil;
     if ([kCalabashIOSVersion isEqualToString:aName]) {
         NSLog(@"DEBUG: reveived IOS version: '%@'", [aResult stdOutput]);
@@ -161,13 +179,55 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 
 #pragma mark - Window Life Cycle
 
+- (NSView *) mask {
+    if (_mask != nil) { return _mask; }
+    NSButton *startTerminal = [self buttonStartTerminal];
+    NSRect stf = startTerminal.frame;
+    NSView *mask = [[NSView alloc] initWithFrame:NSMakeRect(stf.origin.x + 1.5, stf.origin.y + 2,
+                                                            stf.size.width - 3, stf.size.height - 4)];
+    CALayer *viewLayer = [CALayer layer];
+    [viewLayer setBackgroundColor:CGColorCreateGenericRGB(0.0, 0.0, 0.0, 0.4)];
+    [viewLayer setCornerRadius:4.0f];
+    [mask setWantsLayer:YES];
+    [mask setLayer:viewLayer];
+    _mask = mask;
+    return mask;
+}
+
+- (NSProgressIndicator *) progressIndicator {
+    if (_progressIndicator != nil) { return _progressIndicator; }
+    NSView *mask = [self mask];
+    NSRect maskF = mask.frame;
+    CGFloat piW = 32;
+    CGFloat piH = 32;
+    CGFloat piX = (maskF.size.width/2) - (piW/2);
+    CGFloat piY = (maskF.size.height/2) - (piH/2);
+    NSRect frame = NSMakeRect(piX, piY, piW, piH);
+    NSProgressIndicator *pi = [[NSProgressIndicator alloc]
+                               initWithFrame:frame];
+    pi.controlSize = NSRegularControlSize;
+    pi.controlTint = [NSColor whiteColor];
+    [pi setDisplayedWhenStopped:NO];
+    [pi setStyle:NSProgressIndicatorSpinningStyle];
+    _progressIndicator = pi;
+    return _progressIndicator;
+}
+
 - (void) awakeFromNib {
     NSButton *startTerminal = [self buttonStartTerminal];
     // will enable once the sandbox is installed (see the handle did finish notification)
     [startTerminal setEnabled:NO];
     
-  
     NSRect stf = startTerminal.frame;
+    
+    NSView *mask = [self mask];
+    NSProgressIndicator *pi = [self progressIndicator];
+    [mask addSubview:pi];
+    
+    [self.window.contentView addSubview:mask positioned:NSWindowAbove relativeTo:startTerminal];
+    
+    [pi startAnimation:nil];
+    
     
     NSImage *image = [NSImage imageNamed:@"calabash-128x128.tiff"];
     CGFloat wh = 110;
