@@ -20,19 +20,14 @@
 + (NSString *)tokaidoInstalledBootstrapDirectory;
 + (NSString *)tokaidoInstalledBinDirectory;
 + (NSString *)tokaidoInstalledFirewallDirectory;
-+ (NSString *)tokaidoInstalledRbConfig;
-+ (NSString *)tokaidoInstalledLLVMGCC;
 + (NSString *)tokaidoMuxrSocketPath;
 + (NSString *)tokaidoBundledRubiesDirectory;
 + (NSString *)tokaidoBundledGemsFile;
-+ (NSString *)tokaidoBundledBinFile;
-+ (NSString *)tokaidoBundledLLVMGCCFile;
 + (NSString *)tokaidoBundledBootstrapFile;
 + (NSString *)tokaidoAppSupportDirectory;
 
 - (void)openTerminalWithPath:(NSString *)path;
 
-- (void)loadAppSettings;
 - (void)saveAppSettings;
 
 @end

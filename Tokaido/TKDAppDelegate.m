@@ -21,19 +21,39 @@ static NSString * const kTokaidoBootstrapFirewallPlistScriptString = @"TOKAIDO_F
 // tokaido-bootstrap label
 static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
 
+
+typedef enum : u_int16_t {
+    k_tkd_error_could_not_create_sandbox_dir
+} TKDErrorCondition;
+
+@interface TKDAppDelegate ()
+
+@property (nonatomic, copy, readonly) NSString *calabashDirUUID;
+
+- (void) handleErrorCondition:(TKDErrorCondition) aErrorCondition
+                        error:(NSError *) aError;
+
+@end
+
+
 @implementation TKDAppDelegate
+
+@synthesize calabashDirUUID = _calabashDirUUID;
+
+- (NSString *) calabashDirUUID {
+    if (_calabashDirUUID != nil) { return _calabashDirUUID; }
+    _calabashDirUUID =  [[NSUUID UUID] UUIDString];
+    return _calabashDirUUID;
+}
+
+- (void) handleErrorCondition:(TKDErrorCondition) aErrorCondition
+                        error:(NSError *)aError {
+    NSLog(@"ERROR: '%d' - nothing to do (yet)", aErrorCondition);
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self ensureTokaidoAppSupportDirectoryIsUpToDate];
-    [self ensureTokaidoInstallIsInstalled];
-    [self ensureTokaidoBootstrapIsInstalled];
-    sleep(1);
-    [self stopTokaidoBootstrap];
-    sleep(1);
-    [self startTokaidoBootstrap];
-    
-    [self loadAppSettings];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
@@ -43,13 +63,19 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
 
 - (void)applicationWillTerminate:(NSNotification *)notification;
 {
-    [self stopTokaidoBootstrap];
+    
 }
 
 #pragma mark Launch Steps
 
-- (void)ensureTokaidoAppSupportDirectoryIsUpToDate
+
+- (void) ensureTokaidoAppSupportDirectoryIsUpToDate
 {
+    
+    /*** TODO ***
+     we can probably remove a bunch of this
+     ************/
+    
     NSFileManager *fm = [NSFileManager defaultManager];
     
     // Go through the ruby bundles already in our app support directory
@@ -73,7 +99,7 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
     NSString *bundledRubiesDirectory = [TKDAppDelegate tokaidoBundledRubiesDirectory];
     
     NSLog(@"Bundled Rubies Directory: %@", bundledRubiesDirectory);
-
+    
     NSDirectoryEnumerator *bundledRubiesEnum = [fm enumeratorAtPath:bundledRubiesDirectory];
     NSString *bundledFile;
     while (bundledFile = [bundledRubiesEnum nextObject]) {
@@ -95,223 +121,10 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
         [self unzipFileAtPath:[TKDAppDelegate tokaidoBundledGemsFile]
               inDirectoryPath:[TKDAppDelegate tokaidoAppSupportDirectory]];
     }
-
-    BOOL binDirectoryExists = [fm fileExistsAtPath:[TKDAppDelegate tokaidoInstalledBinDirectory]];
-    if (!binDirectoryExists) {
-        NSLog(@"Unzipping Bundled Tokaido binaries");
-        [TKDAppDelegate createDirectoryAtPathIfNonExistant:[TKDAppDelegate tokaidoInstalledBinDirectory]];
-        [self unzipFileAtPath:[TKDAppDelegate tokaidoBundledBinFile]
-              inDirectoryPath:[TKDAppDelegate tokaidoAppSupportDirectory]];
-    }
-
-    // Make sure we have a llvm-gcc installed, for gems that require compilation
-    NSString *llvmDirectory = [[TKDAppDelegate tokaidoAppSupportDirectory] stringByAppendingPathComponent:@"/llvm-gcc"];
-    BOOL llvmExists = [fm fileExistsAtPath:llvmDirectory];
-    if (!llvmExists) {
-        [TKDAppDelegate createDirectoryAtPathIfNonExistant:llvmDirectory];
-        [self unzipFileAtPath:[TKDAppDelegate tokaidoBundledLLVMGCCFile]
-              inDirectoryPath:llvmDirectory];
-    }
-    
-    NSError *error = nil;
-    NSString *rbConfigPath = [TKDAppDelegate tokaidoInstalledRbConfig];
-    NSMutableString *rbconfig = [[NSString stringWithContentsOfFile:rbConfigPath encoding:NSUTF8StringEncoding error:&error] mutableCopy];
-    
-    if (error) {
-        NSLog(@"ERROR patiching rbconfig: %@", [error localizedDescription]);
-        return;
-    }
-    
-    // Replace the TOPDIR line
-    NSRegularExpression *topDirRegex = [NSRegularExpression regularExpressionWithPattern:@"TOPDIR\\s=.*"
-                                                                           options:0
-                                                                             error:&error];
-    
-    if (error) {
-        NSLog(@"ERROR patching rbconfig: %@", [error localizedDescription]);
-        return;
-    }
-    
-    NSString *newTopDir = [NSString stringWithFormat:@"TOPDIR = \"%@/2.0.0-p195\"", [TKDAppDelegate tokaidoInstalledRubiesDirectory]];
-    [topDirRegex replaceMatchesInString:rbconfig
-                          options:0
-                            range:NSMakeRange(0, [rbconfig length])
-                     withTemplate:newTopDir];
-    
-    
-    // Replace the CONFIG["CC"] line
-    NSRegularExpression *ccRegex = [NSRegularExpression regularExpressionWithPattern:@"CONFIG\\[\\\"CC\\\"\\].*"
-                                                                           options:0
-                                                                             error:&error];
-    
-    if (error) {
-        NSLog(@"ERROR patching rbconfig: %@", [error localizedDescription]);
-        return;
-    }
-    
-    NSString *newConfig = [NSString stringWithFormat:@"CONFIG[\"CC\"] = \"%@\"", [TKDAppDelegate tokaidoInstalledLLVMGCC]];
-    [ccRegex replaceMatchesInString:rbconfig
-                          options:0
-                            range:NSMakeRange(0, [rbconfig length])
-                     withTemplate:newConfig];
-    
-    [rbconfig writeToFile:[TKDAppDelegate tokaidoInstalledRbConfig]
-               atomically:YES
-                 encoding:NSUTF8StringEncoding
-                    error:&error];
-    
-    if (error) {
-        NSLog(@"ERROR saving rbconfig: %@", [error localizedDescription]);
-        return;
-    }
 }
 
-
-- (void)ensureTokaidoBootstrapIsInstalled
-{
-    // Check if /etc/resolver/tokaido exists. If not, we need to run tokaido-install.
-    NSFileManager *fm = [NSFileManager defaultManager];
-    BOOL tokaidoBootstrapInstalled = [fm fileExistsAtPath:@"/Library/LaunchDaemons/com.tokaido.firewall.plist"];
-    
-    // If not, do the installation stuff.
-    if (tokaidoBootstrapInstalled) {
-        NSLog(@"tokaido-bootstrap detected...");
-    } else {
-        NSLog(@"tokaido-bootstrap NOT detected, installing...");
-        
-        // Setup a bunch of paths
-        NSString *executablePath = [[@"~/.tokaido/ruby" stringByExpandingTildeInPath] stringByResolvingSymlinksInPath];
-        NSString *setupScriptPath = [[TKDAppDelegate tokaidoInstalledBootstrapDirectory]stringByAppendingPathComponent:@"bundle/bundler/setup.rb"];
-        NSString *firewallPlistPath = [[TKDAppDelegate tokaidoInstalledBootstrapDirectory] stringByAppendingPathComponent:@"firewall/com.tokaido.firewall.plist"];
-        NSString *firewallScriptPath = [[TKDAppDelegate tokaidoInstalledBootstrapDirectory] stringByAppendingPathComponent:@"firewall/firewall_rules.rb"];
-        NSString *firewallPath = [TKDAppDelegate tokaidoInstalledFirewallDirectory];
-        
-        // Rewrite the install plist to contain appropriate values
-        NSError *error = nil;
-        NSString *firewallPlistString = [NSString stringWithContentsOfFile:firewallPlistPath
-                                                                  encoding:NSUTF8StringEncoding
-                                                                     error:&error];
-        if (error) {
-            NSLog(@"ERROR: Couldn't read firewall plist: %@", [error localizedDescription]);
-        } else {
-            firewallPlistString = [firewallPlistString stringByReplacingOccurrencesOfString:kTokaidoBootstrapFirewallPlistCommandString
-                                                                                 withString:executablePath];
-            firewallPlistString = [firewallPlistString stringByReplacingOccurrencesOfString:kTokaidoBootstrapFirewallPlistTmpDir
-                                                                                 withString:firewallPath];
-            firewallPlistString = [firewallPlistString stringByReplacingOccurrencesOfString:kTokaidoBootstrapFirewallPlistSetupString
-                                                                                 withString:setupScriptPath];
-            firewallPlistString = [firewallPlistString stringByReplacingOccurrencesOfString:kTokaidoBootstrapFirewallPlistScriptString
-                                                                                 withString:firewallScriptPath];
-            [firewallPlistString writeToFile:firewallPlistPath
-                                  atomically:YES
-                                    encoding:NSUTF8StringEncoding
-                                       error:&error];
-        }
-        
-        if (error) {
-            NSLog(@"ERROR: Coludn't write the firewall plist: %@", [error localizedDescription]);
-        }
-        
-        
-        // Run tokaido-install with the appropriate setup stuff beforehand
-        
-        NSString *tokaidoLabel = @"io.tilde.tokaido-install";
-        NSString *tokadioInstallScriptPath = [[TKDAppDelegate tokaidoInstalledBootstrapDirectory] stringByAppendingPathComponent:@"bin/tokaido-install"];
-                
-        AuthorizationItem authItem = { kSMRightBlessPrivilegedHelper, 0, NULL, 0 };
-        AuthorizationRights authRights = { 1, &authItem };
-        AuthorizationFlags flags = kAuthorizationFlagInteractionAllowed | kAuthorizationFlagPreAuthorize | kAuthorizationFlagExtendRights;
-        
-        // Empty for now
-        NSString *promptText = @"";
-        AuthorizationItem dialogConfiguration[1] = {
-            {kAuthorizationEnvironmentPrompt, [promptText length], (char *) [promptText UTF8String], 0}
-        };
-        
-        AuthorizationEnvironment authorizationEnvironment = { 0 };
-        authorizationEnvironment.items = dialogConfiguration;
-        authorizationEnvironment.count = 1;
-        
-        AuthorizationRef auth;
-        if( AuthorizationCreate( &authRights, &authorizationEnvironment, flags, &auth ) == errAuthorizationSuccess ) {
-            (void) SMJobRemove( kSMDomainSystemLaunchd, (__bridge CFStringRef)tokaidoLabel, auth, false, NULL );
-            
-            NSMutableDictionary *plist = [NSMutableDictionary dictionary];
-            [plist setObject:tokaidoLabel forKey:@"Label"];
-            [plist setObject:[NSNumber numberWithBool:YES] forKey:@"RunAtLoad"];
-            [plist setObject:[NSNumber numberWithBool:YES] forKey:@"AbandonProcessGroup"];
-            [plist setObject:@[ executablePath, @"-r", setupScriptPath, tokadioInstallScriptPath ] forKey:@"ProgramArguments"];
-            [plist setObject:@"/var/log/tokaido-install.log" forKey:@"StandardOutPath"];
-            [plist setObject:@"/var/log/tokaido-install.error" forKey:@"StandardErrorPath"];
-            
-            CFErrorRef error;
-            if ( SMJobSubmit( kSMDomainSystemLaunchd, (__bridge CFDictionaryRef)plist, auth, &error) ) {
-                // Script is running
-                NSLog(@"Ran successfully.");
-                
-            } else {
-                NSLog( @"Authenticated install submit failed with error %@", error );
-            }
-            
-            if (error) {
-                NSLog(@"SMJobSubmit ERROR: %@", CFErrorCopyDescription(error));
-                CFRelease(error);
-            }
-            
-            AuthorizationFree(auth, 0);
-                        
-        } else {
-            
-            NSLog(@"Couldn't run tokaido-install. Quitting.");
-            [[NSApplication sharedApplication] terminate:nil];
-            
-        }
-    }
-}
-
-
-- (void)ensureTokaidoInstallIsInstalled
-{
-    // Check if tokaido-bootstrap is where we expect it to be
-    NSString *bootstrapDir = [TKDAppDelegate tokaidoInstalledBootstrapDirectory];
-    NSFileManager *fm = [NSFileManager defaultManager];
-    BOOL bootstrapGemsInstalled = [fm fileExistsAtPath:[bootstrapDir stringByAppendingFormat:@"/bundle/bundler/setup.rb"]];
-    
-    if (!bootstrapGemsInstalled) {
-        NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:10];
-        NSString *fullPathToBootstrapZip = [TKDAppDelegate tokaidoBundledBootstrapFile];
-        [arguments addObject:@"-o"];
-        [arguments addObject:fullPathToBootstrapZip];
-        
-        NSTask *unzipTask = [[NSTask alloc] init];
-        [unzipTask setLaunchPath:@"/usr/bin/unzip"];
-        [unzipTask setCurrentDirectoryPath:[TKDAppDelegate tokaidoAppSupportDirectory]];
-        [unzipTask setArguments:arguments];
-        [unzipTask launch];
-        [unzipTask waitUntilExit];
-    }
-}
 
 #pragma mark App Settings
-
-- (void)loadAppSettings
-{
-    NSString *appSettingsPath = [[TKDAppDelegate tokaidoAppSupportDirectory] stringByAppendingPathComponent:@"AppSettings"];
-    
-    NSMutableArray *apps = nil;
-    @try {
-        apps = [NSKeyedUnarchiver unarchiveObjectWithFile:appSettingsPath];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"ERROR: Couldn't load app settings: %@", exception);
-    }
-    
-    if (apps) {
-        self.tokaidoController.apps = apps;
-    } else {
-        NSLog(@"ERROR: Could not load app settings.");
-    }
-}
 
 - (void)saveAppSettings
 {
@@ -328,7 +141,7 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
 {
     NSString *fullPathToRubyZip = [[TKDAppDelegate tokaidoBundledRubiesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.zip", rubyName]];
     [self unzipFileAtPath:fullPathToRubyZip inDirectoryPath:[TKDAppDelegate tokaidoInstalledRubiesDirectory]];
-        
+    
     // We need a better way to decide what the default ruby should be. Right now we only have one, so just set it as default.
     NSTask *linkTask = [[NSTask alloc] init];
     [linkTask setLaunchPath:@"/bin/ln"];
@@ -355,22 +168,29 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
 
 - (void)openTerminalWithPath:(NSString *)path;
 {
+    
     NSString *rubyVersion = @"2.0.0-p195";
-
+    
     // First, set up a variable for our ruby installation.
-    NSString *tokaidoSetupStep0 = [NSString stringWithFormat:@"export TOKAIDO_PATH=%@", [self rubyBinDirectory:rubyVersion]];
-
+    NSString *tokaidoSetupStep0 = [NSString stringWithFormat:@"export TOKAIDO_PATH=%@",
+                                   [self rubyBinDirectory:rubyVersion]];
+    
+    NSString *tokaidoSetupStep1 = [NSString stringWithFormat:@"export TOKAIDO_SANDBOX_PATH=%@",
+                                   [TKDAppDelegate tokaidoAppSupportDirectory]];
+    
     // Second, set up the directory we will cd to
-    NSString *tokaidoSetupStep1 = [tokaidoSetupStep0 stringByAppendingFormat:@"; export TOKAIDO_APP_DIR=%@",
+    NSString *tokaidoSetupStep2 = [NSString stringWithFormat:@"export TOKAIDO_APP_DIR=%@",
                                    [self sanitizePath:path]];
-
-    // Third, source the SetupTokaido script, to load these variables into the shell and clear up the screen.
-    NSString *tokaidoSetupStep2 = [tokaidoSetupStep1 stringByAppendingFormat:@"; source %@/SetupTokaido.sh",
+    
+    NSString *tokaidoSetupStep3 = [NSString stringWithFormat:@"source %@/SetupTokaido.sh",
                                    [[NSBundle mainBundle] resourcePath]];
 
+    NSArray *steps = @[tokaidoSetupStep0, tokaidoSetupStep1, tokaidoSetupStep2, tokaidoSetupStep3];
+    NSString *stepStr = [steps componentsJoinedByString:@"; "];
+    
     // Finally run everything.
     TerminalApplication *terminal = [SBApplication applicationWithBundleIdentifier:@"com.apple.Terminal"];
-    [terminal doScript:tokaidoSetupStep2 in:nil];
+    [terminal doScript:stepStr in:nil];
     [terminal activate];
 }
 
@@ -403,6 +223,7 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
     return tokaidoInstalledRubiesDirectory;
 }
 
+
 + (NSString *)tokaidoInstalledBootstrapDirectory;
 {
     NSString *tokaidoInstalledBootstrapDirectory = [[self tokaidoAppSupportDirectory] stringByAppendingPathComponent:@"Bootstrap"];
@@ -422,16 +243,10 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
     return tokaidoInstalledFirewallDirectory;
 }
 
-+ (NSString *)tokaidoInstalledRbConfig;
++ (NSString *)tokaidoBundledBootstrapFile
 {
-    //TODO: this really shouldn't be hardcoded, but we don't yet have a plan to handle multiple rubies.
-    return [[self tokaidoInstalledRubiesDirectory] stringByAppendingPathComponent:@"/2.0.0-p195/lib/ruby/2.0.0/x86_64-darwin12.3.0/rbconfig.rb"];
-}
-
-
-+ (NSString *)tokaidoInstalledLLVMGCC;
-{
-    return [[self tokaidoAppSupportDirectory] stringByAppendingPathComponent:@"llvm-gcc/llvm-gcc-4.2"];
+    NSString *tokaidoBundledRubiesDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tokaido-bootstrap.zip"];
+    return tokaidoBundledRubiesDirectory;
 }
 
 + (NSString *)tokaidoMuxrSocketPath;
@@ -449,133 +264,60 @@ static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
     return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tokaido-gems.zip"];
 }
 
-+ (NSString *)tokaidoBundledBinFile;
-{
-    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tokaido-bin.zip"];
-}
-
-+ (NSString *)tokaidoBundledLLVMGCCFile;
-{
-    NSString *tokaidoBundledLLVMGCCFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"llvm-gcc-4.2.zip"];
-    return tokaidoBundledLLVMGCCFile;
-}
-
-+ (NSString *)tokaidoBundledBootstrapFile
-{
-    NSString *tokaidoBundledRubiesDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tokaido-bootstrap.zip"];
-    return tokaidoBundledRubiesDirectory;
-}
-
 
 + (NSString *)tokaidoAppSupportDirectory;
 {
+
+    /*** UNEXPECTED ***
+     what we want for calabash is a sandboxed directory where the ruby version
+     and the various required gems can be installed. 
+     
+     i think what we want to use a temporary directory that is unique for each run
+     
+     that way multiple instances of the Calabash.app without clobbering each 
+     other's gem/ruby sandbox
+     
+     CONS: 
+      * it is a temp directory - it disappears after 3 days
+      * we are creating ~100M of stuff every time we launch the app
+      * launch time is longer (but it is not terrible)
+     
+     PROS:
+      * it is easy
+
+     ******************/
+    
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *applicationSupportDirectory = [paths objectAtIndex:0];
-    NSString *tokaidoDirectory = [NSString stringWithFormat:@"%@/%@", applicationSupportDirectory,
-                                  appName];
-    [self createDirectoryAtPathIfNonExistant:tokaidoDirectory];
-
-    NSString *homeDirectory = NSHomeDirectory();
-    NSString *tokaidoDirectorySymlink = [homeDirectory stringByAppendingPathComponent:@"/.calabash"];
+    NSString *tmpDir = NSTemporaryDirectory();
+    if (tmpDir == nil) { tmpDir = @"/tmp"; }
+    TKDAppDelegate *del = (TKDAppDelegate *)[NSApplication sharedApplication].delegate;
+    NSString *subdir = [NSString stringWithFormat:@"%@-%@", appName, [del calabashDirUUID]];
+    NSString *workspaceDir = [tmpDir stringByAppendingPathComponent:subdir];
     
     NSFileManager *fm = [NSFileManager defaultManager];
-    if (![fm fileExistsAtPath:tokaidoDirectorySymlink]) {
-        NSError *error = nil;
-        [fm linkItemAtPath:tokaidoDirectory toPath:tokaidoDirectorySymlink error:&error];
-        if (error) {
-            NSLog(@"ERROR: Couldn't create the .tokaido symlink. %@", error);
-        }
+    if ([fm fileExistsAtPath:workspaceDir] == YES) { return workspaceDir; }
+
+    NSError *error = nil;
+    if ([fm createDirectoryAtPath:workspaceDir withIntermediateDirectories:YES
+                       attributes:nil error:&error] == NO) {
+        NSLog(@"ERROR: could not create a sandbox directory");
+        NSLog(@"ERROR: path: %@", workspaceDir);
+        NSLog(@"ERROR: returning nil");
+        [del handleErrorCondition:k_tkd_error_could_not_create_sandbox_dir error:error];
+        return nil;
     }
-    
-    return tokaidoDirectorySymlink;
+    return workspaceDir;
 }
 
 #pragma mark start/stop tokaido-bootstrap
 
-- (void)startTokaidoBootstrap
-{
-    NSString *executablePath = [[TKDAppDelegate tokaidoAppSupportDirectory] stringByAppendingPathComponent:@"/ruby"];
-    NSString *executableDirectory = [TKDAppDelegate tokaidoAppSupportDirectory];
-    NSString *setupScriptPath = [[TKDAppDelegate tokaidoInstalledBootstrapDirectory] stringByAppendingPathComponent:@"bundle/bundler/setup.rb"];
-    NSString *tokaidoBootstrapScriptPath = [[TKDAppDelegate tokaidoInstalledBootstrapDirectory] stringByAppendingPathComponent:@"bin/tokaido-bootstrap"];
-    NSString *firewallPath = [TKDAppDelegate tokaidoInstalledFirewallDirectory];
-    NSString *outPath = [[TKDAppDelegate tokaidoInstalledFirewallDirectory] stringByAppendingPathComponent:@"/bootstrap.out"];
-    NSString *errPath = [[TKDAppDelegate tokaidoInstalledFirewallDirectory] stringByAppendingPathComponent:@"/bootstrap.err"];
-    NSString *gemHome = [TKDAppDelegate tokaidoInstalledGemsDirectory];
-    NSString *gemPath = [[TKDAppDelegate tokaidoInstalledGemsDirectory] stringByAppendingPathComponent:@"/bin"];
-    NSString *path = [executableDirectory stringByAppendingFormat:@":%@", gemPath];
-    
-    //unlink current socket
-    unlink([[TKDAppDelegate tokaidoMuxrSocketPath] UTF8String]);
-    
-    NSMutableDictionary *plist = [NSMutableDictionary dictionary];
-    [plist setObject:kTokaidoBootstrapLabel forKey:@"Label"];
-    [plist setObject:[NSNumber numberWithBool:YES] forKey:@"RunAtLoad"];
-    [plist setObject:outPath forKey:@"StandardOutPath"];
-    [plist setObject:errPath forKey:@"StandardErrorPath"];
-    [plist setObject:[NSNumber numberWithBool:YES] forKey:@"AbandonProcessGroup"];
-    [plist setObject:@{
-     @"TOKAIDO_TMPDIR": firewallPath,
-     @"PATH": path,
-     @"GEM_HOME": gemHome,
-     @"GEM_PATH": gemHome // Think we need this? Not really sure.
-     }  forKey:@"EnvironmentVariables"];
-    
-    [plist setObject:@[ executablePath, @"-r", setupScriptPath, tokaidoBootstrapScriptPath ]
-              forKey:@"ProgramArguments"];
-    
-    CFErrorRef error;
-    if ( SMJobSubmit( kSMDomainUserLaunchd, (__bridge CFDictionaryRef)plist, NULL, &error) ) {
-        // Script is running
-        NSLog(@"tokaido-bootstrap started successfully.");
-        
-    } else {
-        NSLog(@"tokaido-bootstrap failed to start – error %@", error);
-    }
-    
-    if (error) {
-        NSLog(@"SMJobSubmit ERROR: %@", CFErrorCopyDescription(error));
-        CFRelease(error);
-    }
-}
 
 - (void)stopTokaidoBootstrap
 {
     NSLog(@"tokaido-bootstrap shutting down...");
-     SMJobRemove(kSMDomainUserLaunchd, (__bridge CFStringRef)kTokaidoBootstrapLabel, NULL, false, NULL);
+    SMJobRemove(kSMDomainUserLaunchd, (__bridge CFStringRef)kTokaidoBootstrapLabel, NULL, false, NULL);
 }
 
-- (BOOL)runBundleInstallForApp:(TKDApp *)app;
-{
-    [app enterSubstate:TKDAppBootingBundling];
-
-    NSString *executablePath = [[TKDAppDelegate tokaidoAppSupportDirectory] stringByAppendingPathComponent:@"/ruby"];
-    NSString *setupScriptPath = [[TKDAppDelegate tokaidoInstalledBootstrapDirectory] stringByAppendingPathComponent:@"bundle/bundler/setup.rb"];
-    NSString *bundlerPath = [[TKDAppDelegate tokaidoInstalledGemsDirectory] stringByAppendingPathComponent:@"bin/bundle"];
-    NSString *gemHome = [TKDAppDelegate tokaidoInstalledGemsDirectory];
-
-    NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:10];
-    [arguments addObject:@"-r"];
-    [arguments addObject:setupScriptPath];
-    [arguments addObject:bundlerPath];
-    [arguments addObject:@"install"];
-
-    NSTask *unzipTask = [[NSTask alloc] init];
-    [unzipTask setEnvironment:@{@"GEM_HOME": gemHome}];
-    [unzipTask setLaunchPath:executablePath];
-    [unzipTask setCurrentDirectoryPath:app.appDirectoryPath];
-    [unzipTask setArguments:arguments];
-    [unzipTask launch];
-    [unzipTask waitUntilExit];
-
-    if ([unzipTask terminationStatus] != 0) {
-        return NO;
-    }
-    
-    return YES;
-}
 
 #pragma mark Helpers
 
