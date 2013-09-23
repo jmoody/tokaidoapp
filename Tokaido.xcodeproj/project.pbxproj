@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		F5D1B1AF17F0C04C00A180A5 /* versioning */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F5D1B1B017F0C04C00A180A5 /* Build configuration list for PBXAggregateTarget "versioning" */;
+			buildPhases = (
+				F5D1B1B517F0C0F900A180A5 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = versioning;
+			productName = versioning;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		08783A2A1784A9AC0071AC1C /* uninstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = 08783A291784A9AC0071AC1C /* uninstall.sh */; };
 		08783A2E1785D5450071AC1C /* gnome-terminal.png in Resources */ = {isa = PBXBuildFile; fileRef = 08783A2D1785D5450071AC1C /* gnome-terminal.png */; };
@@ -56,6 +70,10 @@
 		CD8285DF1655B7DF000CB252 /* TKDAppCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8285DD1655B670000CB252 /* TKDAppCollectionView.m */; };
 		CDA9B856172B42E30027E78B /* llvm-gcc-4.2.zip in Resources */ = {isa = PBXBuildFile; fileRef = CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */; };
 		CDB963F617288901002A8A43 /* tokaido-gems.zip in Resources */ = {isa = PBXBuildFile; fileRef = CDB963F517288901002A8A43 /* tokaido-gems.zip */; };
+		F5D1B19E17F07DD100A180A5 /* LjsUnixOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D1B19917F07DD100A180A5 /* LjsUnixOperation.m */; };
+		F5D1B19F17F07DD100A180A5 /* LjsUnixOperationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D1B19B17F07DD100A180A5 /* LjsUnixOperationResult.m */; };
+		F5D1B1A217F0911200A180A5 /* calabash-128x128@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1B1A117F0911200A180A5 /* calabash-128x128@2x.png */; };
+		F5D1B1A417F0911A00A180A5 /* calabash-128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1B1A317F0911A00A180A5 /* calabash-128x128.png */; };
 		F5ED7EA517EF277700F492BF /* Calabash.icns in Resources */ = {isa = PBXBuildFile; fileRef = F5ED7EA417EF277700F492BF /* Calabash.icns */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +84,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3AD6930616373C9F005AF81E;
 			remoteInfo = Tokaido;
+		};
+		F5D1B1B317F0C07600A180A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AD692FE16373C9F005AF81E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5D1B1AF17F0C04C00A180A5;
+			remoteInfo = versioning;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -96,7 +121,7 @@
 		3A19ECE81640734F0035ABA2 /* TKAppIconBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TKAppIconBackground@2x.png"; sourceTree = "<group>"; };
 		3A19ECEB1640777E0035ABA2 /* TKIconRuby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TKIconRuby.png; sourceTree = "<group>"; };
 		3A19ECEC1640777E0035ABA2 /* TKIconRuby@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TKIconRuby@2x.png"; sourceTree = "<group>"; };
-		3AD6930716373C9F005AF81E /* Tokaido.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Tokaido.app; path = Calabash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AD6930716373C9F005AF81E /* Calabash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calabash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD6930B16373C9F005AF81E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3AD6930E16373C9F005AF81E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		3AD6930F16373C9F005AF81E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -153,6 +178,12 @@
 		CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "llvm-gcc-4.2.zip"; sourceTree = "<group>"; };
 		CDB963F517288901002A8A43 /* tokaido-gems.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "tokaido-gems.zip"; sourceTree = "<group>"; };
 		E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		F5D1B19817F07DD100A180A5 /* LjsUnixOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LjsUnixOperation.h; sourceTree = "<group>"; };
+		F5D1B19917F07DD100A180A5 /* LjsUnixOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LjsUnixOperation.m; sourceTree = "<group>"; };
+		F5D1B19A17F07DD100A180A5 /* LjsUnixOperationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LjsUnixOperationResult.h; sourceTree = "<group>"; };
+		F5D1B19B17F07DD100A180A5 /* LjsUnixOperationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LjsUnixOperationResult.m; sourceTree = "<group>"; };
+		F5D1B1A117F0911200A180A5 /* calabash-128x128@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calabash-128x128@2x.png"; sourceTree = "<group>"; };
+		F5D1B1A317F0911A00A180A5 /* calabash-128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calabash-128x128.png"; sourceTree = "<group>"; };
 		F5ED7EA417EF277700F492BF /* Calabash.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Calabash.icns; path = ../Calabash.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +216,7 @@
 		3AD692FC16373C9F005AF81E = {
 			isa = PBXGroup;
 			children = (
+				F5D1B19617F07DBF00A180A5 /* ThirdParty */,
 				3AD6931116373C9F005AF81E /* Tokaido */,
 				3AD6932E16373C9F005AF81E /* TokaidoTests */,
 				3AD6930A16373C9F005AF81E /* Frameworks */,
@@ -192,11 +224,12 @@
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		3AD6930816373C9F005AF81E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3AD6930716373C9F005AF81E /* Tokaido.app */,
+				3AD6930716373C9F005AF81E /* Calabash.app */,
 				3AD6932816373C9F005AF81E /* TokaidoTests.octest */,
 			);
 			name = Products;
@@ -329,6 +362,8 @@
 		3AD694DC1639E905005AF81E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F5D1B1A317F0911A00A180A5 /* calabash-128x128.png */,
+				F5D1B1A117F0911200A180A5 /* calabash-128x128@2x.png */,
 				08783A2D1785D5450071AC1C /* gnome-terminal.png */,
 				08783A2F1785D7250071AC1C /* power-control.png */,
 				CD1FCB86169D047B00FB7E36 /* Icon */,
@@ -372,6 +407,26 @@
 			name = Gems;
 			sourceTree = "<group>";
 		};
+		F5D1B19617F07DBF00A180A5 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				F5D1B19717F07DD100A180A5 /* LjsUnix */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		F5D1B19717F07DD100A180A5 /* LjsUnix */ = {
+			isa = PBXGroup;
+			children = (
+				F5D1B19817F07DD100A180A5 /* LjsUnixOperation.h */,
+				F5D1B19917F07DD100A180A5 /* LjsUnixOperation.m */,
+				F5D1B19A17F07DD100A180A5 /* LjsUnixOperationResult.h */,
+				F5D1B19B17F07DD100A180A5 /* LjsUnixOperationResult.m */,
+			);
+			name = LjsUnix;
+			path = ThirdParty/LjsUnix;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -388,10 +443,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				F5D1B1B417F0C07600A180A5 /* PBXTargetDependency */,
 			);
 			name = Calabash;
 			productName = Tokaido;
-			productReference = 3AD6930716373C9F005AF81E /* Tokaido.app */;
+			productReference = 3AD6930716373C9F005AF81E /* Calabash.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3AD6932716373C9F005AF81E /* TokaidoTests */ = {
@@ -437,6 +493,7 @@
 			targets = (
 				3AD6930616373C9F005AF81E /* Calabash */,
 				3AD6932716373C9F005AF81E /* TokaidoTests */,
+				F5D1B1AF17F0C04C00A180A5 /* versioning */,
 			);
 		};
 /* End PBXProject section */
@@ -447,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08783A2E1785D5450071AC1C /* gnome-terminal.png in Resources */,
+				F5D1B1A417F0911A00A180A5 /* calabash-128x128.png in Resources */,
 				3AD6931616373C9F005AF81E /* InfoPlist.strings in Resources */,
 				3AD6931C16373C9F005AF81E /* Credits.rtf in Resources */,
 				08783A301785D7250071AC1C /* power-control.png in Resources */,
@@ -462,6 +520,7 @@
 				CD8285B11655A696000CB252 /* down_arrow.png in Resources */,
 				CD1FCB8C169D0DCF00FB7E36 /* Green@2x.png in Resources */,
 				CD1FCB8D169D0DCF00FB7E36 /* Red@2x.png in Resources */,
+				F5D1B1A217F0911200A180A5 /* calabash-128x128@2x.png in Resources */,
 				08783A2A1784A9AC0071AC1C /* uninstall.sh in Resources */,
 				CD1FCB8E169D0DCF00FB7E36 /* Yellow@2x.png in Resources */,
 				F5ED7EA517EF277700F492BF /* Calabash.icns in Resources */,
@@ -513,6 +572,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		F5D1B1B517F0C0F900A180A5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "gitpath=`which git`\nGITREV=`$gitpath rev-parse --short HEAD`\necho \"INFO: setting the GIT_SHORT_REVISION = ${GITREV} in InfoPlist.h\"\necho \"#define GIT_SHORT_REVISION ${GITREV}\" > ./Tokaido/InfoPlist.h\nGITBRANCH=`git rev-parse --abbrev-ref HEAD`\necho \"INFO: setting the GIT_BRANCH = ${GITBRANCH} in InfoPlist.h\"\necho \"#define GIT_BRANCH ${GITBRANCH}\" >> ./Tokaido/InfoPlist.h\n\necho \"INFO: touching Info.plist\"\ntouch ./Tokaido/Tokaido-Info.plist";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -527,8 +600,10 @@
 				C5E21F8317882F94002B24B5 /* TKDAppViewItemView.m in Sources */,
 				3AD69509163B4093005AF81E /* TKDAppViewItem.m in Sources */,
 				3A19ECE616406F5B0035ABA2 /* TKDSelectableIcon.m in Sources */,
+				F5D1B19E17F07DD100A180A5 /* LjsUnixOperation.m in Sources */,
 				CD8285A916559A9D000CB252 /* TKDRailsAppTokenField.m in Sources */,
 				CD8285DF1655B7DF000CB252 /* TKDAppCollectionView.m in Sources */,
+				F5D1B19F17F07DD100A180A5 /* LjsUnixOperationResult.m in Sources */,
 				C545BDBB178346D900DACCBD /* TKDTask.m in Sources */,
 				CD5A8937170CC4E900217D8A /* TKDMuxrManager.m in Sources */,
 				CD5A8980171380A600217D8A /* TKDEditAppController.m in Sources */,
@@ -551,6 +626,11 @@
 			isa = PBXTargetDependency;
 			target = 3AD6930616373C9F005AF81E /* Calabash */;
 			targetProxy = 3AD6932C16373C9F005AF81E /* PBXContainerItemProxy */;
+		};
+		F5D1B1B417F0C07600A180A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5D1B1AF17F0C04C00A180A5 /* versioning */;
+			targetProxy = F5D1B1B317F0C07600A180A5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -651,6 +731,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tokaido/Tokaido-Prefix.pch";
 				INFOPLIST_FILE = "Tokaido/Tokaido-Info.plist";
+				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -666,6 +748,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tokaido/Tokaido-Prefix.pch";
 				INFOPLIST_FILE = "Tokaido/Tokaido-Info.plist";
+				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
+				INFOPLIST_PREPROCESS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -701,6 +785,20 @@
 			};
 			name = Release;
 		};
+		F5D1B1B117F0C04C00A180A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F5D1B1B217F0C04C00A180A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -730,6 +828,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		F5D1B1B017F0C04C00A180A5 /* Build configuration list for PBXAggregateTarget "versioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5D1B1B117F0C04C00A180A5 /* Debug */,
+				F5D1B1B217F0C04C00A180A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

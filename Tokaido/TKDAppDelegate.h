@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "TKDTokaidoController.h"
 
+extern NSString *const TKDDidFinishInstallingSandboxNotification;
+extern NSString *const kTKDInstalledRubyVersion;
+
 @interface TKDAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
@@ -26,8 +29,8 @@
 + (NSString *)tokaidoBundledBootstrapFile;
 + (NSString *)tokaidoAppSupportDirectory;
 
-- (void)openTerminalWithPath:(NSString *)path;
+- (void) openTerminalWithPath:(NSString *)path;
 
-- (void)saveAppSettings;
+- (void) saveAppSettings;
 
 @end

@@ -21,6 +21,8 @@ static NSString * const kTokaidoBootstrapFirewallPlistScriptString = @"TOKAIDO_F
 // tokaido-bootstrap label
 static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
 
+NSString *const TKDDidFinishInstallingSandboxNotification = @"com.xamarin.Calabash NOTIFICATION finished installing sandbox";
+NSString *const kTKDInstalledRubyVersion = @"2.0.0-p195";
 
 typedef enum : u_int16_t {
     k_tkd_error_could_not_create_sandbox_dir
@@ -29,9 +31,7 @@ typedef enum : u_int16_t {
 @interface TKDAppDelegate ()
 
 @property (nonatomic, copy, readonly) NSString *calabashDirUUID;
-
-- (void) handleErrorCondition:(TKDErrorCondition) aErrorCondition
-                        error:(NSError *) aError;
+@property (nonatomic, copy, readonly) NSString *pathToSandbox;
 
 @end
 
@@ -39,11 +39,23 @@ typedef enum : u_int16_t {
 @implementation TKDAppDelegate
 
 @synthesize calabashDirUUID = _calabashDirUUID;
+@synthesize pathToSandbox = _pathToSandbox;
 
 - (NSString *) calabashDirUUID {
     if (_calabashDirUUID != nil) { return _calabashDirUUID; }
     _calabashDirUUID =  [[NSUUID UUID] UUIDString];
     return _calabashDirUUID;
+}
+
+- (NSString *) pathToSandbox {
+    if (_pathToSandbox != nil) { return _pathToSandbox; }
+    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    NSString *tmpDir = NSTemporaryDirectory();
+    if (tmpDir == nil) { tmpDir = @"/tmp"; }
+    NSString *subdir = [NSString stringWithFormat:@"%@-%@", appName, [self calabashDirUUID]];
+    NSString *workspaceDir = [tmpDir stringByAppendingPathComponent:subdir];
+    _pathToSandbox = workspaceDir;
+    return _pathToSandbox;
 }
 
 - (void) handleErrorCondition:(TKDErrorCondition) aErrorCondition
@@ -61,9 +73,11 @@ typedef enum : u_int16_t {
     return YES;
 }
 
-- (void)applicationWillTerminate:(NSNotification *)notification;
-{
-    
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    /*** NOTE ***
+     do not try to delete the sandbox directory
+     the app will hang during exit
+     ***********/
 }
 
 #pragma mark Launch Steps
@@ -121,13 +135,14 @@ typedef enum : u_int16_t {
         [self unzipFileAtPath:[TKDAppDelegate tokaidoBundledGemsFile]
               inDirectoryPath:[TKDAppDelegate tokaidoAppSupportDirectory]];
     }
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:TKDDidFinishInstallingSandboxNotification object:nil];
 }
 
 
 #pragma mark App Settings
 
-- (void) saveAppSettings
-{
+- (void) saveAppSettings {
 
 }
 
@@ -165,7 +180,7 @@ typedef enum : u_int16_t {
 - (void)openTerminalWithPath:(NSString *)path;
 {
     
-    NSString *rubyVersion = @"2.0.0-p195";
+    NSString *rubyVersion = kTKDInstalledRubyVersion;
     
     // First, set up a variable for our ruby installation.
     NSString *tokaidoSetupStep0 = [NSString stringWithFormat:@"export TOKAIDO_PATH=%@",
@@ -283,26 +298,22 @@ typedef enum : u_int16_t {
 
      ******************/
     
-    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-    NSString *tmpDir = NSTemporaryDirectory();
-    if (tmpDir == nil) { tmpDir = @"/tmp"; }
     TKDAppDelegate *del = (TKDAppDelegate *)[NSApplication sharedApplication].delegate;
-    NSString *subdir = [NSString stringWithFormat:@"%@-%@", appName, [del calabashDirUUID]];
-    NSString *workspaceDir = [tmpDir stringByAppendingPathComponent:subdir];
+    NSString *sandboxPath = [del pathToSandbox];
     
     NSFileManager *fm = [NSFileManager defaultManager];
-    if ([fm fileExistsAtPath:workspaceDir] == YES) { return workspaceDir; }
+    if ([fm fileExistsAtPath:sandboxPath] == YES) { return sandboxPath; }
 
     NSError *error = nil;
-    if ([fm createDirectoryAtPath:workspaceDir withIntermediateDirectories:YES
+    if ([fm createDirectoryAtPath:sandboxPath withIntermediateDirectories:YES
                        attributes:nil error:&error] == NO) {
         NSLog(@"ERROR: could not create a sandbox directory");
-        NSLog(@"ERROR: path: %@", workspaceDir);
+        NSLog(@"ERROR: path: %@", sandboxPath);
         NSLog(@"ERROR: returning nil");
         [del handleErrorCondition:k_tkd_error_could_not_create_sandbox_dir error:error];
         return nil;
     }
-    return workspaceDir;
+    return sandboxPath;
 }
 
 #pragma mark start/stop tokaido-bootstrap

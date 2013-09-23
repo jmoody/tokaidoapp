@@ -21,6 +21,9 @@ DerivedData
 b/
 tmp/
 
+# versioning
+InfoPlist.h
+
 # Build Artifacts
 Tokaido/tokaido-bin.zip
 Tokaido/tokaido-bootstrap.zip

@@ -4,23 +4,40 @@
 
 When first cloning this repo, be sure to run the following:
 
-    gem install cocoapods
-    pod install
-    bundle install
-    bundle exec rake
-    open Tokaido.xcworkspace
+    1. gem install cocoapods
+    2. pod install
+    3. bundle install
+    4. bundle exec rake
+    5. open Tokaido.xcworkspace
 
 You should then be able to build and run Tokaido in Xcode.
 
+### how it works
 
-### moody changes
+there is a bunch of stuff under the hood that did not bother to understand.  i stripped out stuff that was not relevant to getting a shell up with ruby + calabash + dependent gems installed.
 
-1. fixed a couple of Xcode 5 related compiler errors
-2. updated Podfile versions because they caused `pod install` errors
-3. edited `Tokaido/Gemfile` to include only calabash-cucumber and calabash-android gems
-4. made a couple of changes to the Xcode project to make it build a `Calabash` app (rather than a Tokaido app)
+the setup steps above install ruby and gems into a local directory that is used later to build a sandbox.
 
-#### test
+at application launch, a sandbox directory is created using NSTemporaryDirectory.  the pre-installed ruby (2.0) and the calabash ios and android gems are expanded to that directory.  when the user touches the Start Terminal button in the UI, a shell is opened and the `PATH` variable is massaged so that the sandbox directory because the `GEM_HOME` and the pre-installed ruby becomes the default ruby.
+
+### changing the ruby version
+
+i don't know how to do this.
+
+### changing the calabash version
+
+1. edit the `Tokaido/Gemfile` 
+2. `$ rm -rf ./tmp`
+3. follow steps 3 and 4 in Setup
+4. build and run the Calabash scheme in Xcode
+
+### changing the About view
+
+i punted on this.  you can edit the `Tokaido/en.lproj/Credits.rtf`  to change the content.
+
+if you want something different, provide a layout/design.
+
+### test
 
 1. archived a build
 2. signed and save the Calabash.app to /Applications/
@@ -32,22 +49,8 @@ You should then be able to build and run Tokaido in Xcode.
 * i could execute `calabash-ios console`
 * i could run the cucumber tests on the calabash-ios-example    
 
-#### things that can go wrong
 
-if the shell that pops up cannot find `cucumber` for example. 
-
-* delete your `~/.calabash` directory (was `~/.tokaido`)
-* launch a new shell and try again
-
-check the PATH variable
-
-`echo $PATH`
-
-#### rbenv/rvm and the PATH
-
-if you have rbenv or rvm install, i rewrite the PATH variable for the shell and exclude the .rbenv and .rvm directories.
-
-#### bundler and global ~/.bundle/config
+### bundler and global ~/.bundle/config
 
 i use bundler to pin various projects to specific calabash-cucumber/calabash-android revisions.
 
@@ -59,11 +62,7 @@ Local override for calabash-ios at /Users/moody/git/calabash-ios is using branch
 
 the solution?  do not run with `bundle exec`
 
-#### Converting the Calabash.app into something branded and useful
-
-i just poked around the edges of the Xcode project doing the simple and obvious things.  i don't know where you want to go with this project.
-
-#### the app
+### the app
 
 i included a signed app in the repo `./Calabash.app`
 
