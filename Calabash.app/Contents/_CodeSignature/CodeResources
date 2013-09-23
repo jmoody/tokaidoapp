@@ -12,14 +12,6 @@
 		<data>
 		wgMBd8R40ePmNNNVPn3vtApBhJU=
 		</data>
-		<key>Resources/Green.tiff</key>
-		<data>
-		D+fOz9XzGTkTaAA7Zb4iWMS7xdo=
-		</data>
-		<key>Resources/Red.tiff</key>
-		<data>
-		4HrhtyEw43hj1gMHoAKWA+jZ1IM=
-		</data>
 		<key>Resources/Rubies/2.0.0-p195.zip</key>
 		<data>
 		hVWx64rey9Sqwrg8dvTdqFk3zlA=
@@ -28,29 +20,13 @@
 		<data>
 		fDU28Mv6chq4qI/QuPIsF2qmJHs=
 		</data>
-		<key>Resources/TKAppIconBackground.tiff</key>
-		<data>
-		GWKyb7hW4jIa1IRJ4Nvntb+ZIcw=
-		</data>
 		<key>Resources/TKDAppViewItem.nib</key>
 		<data>
 		l/sKRE0x9uSMF+BToaJEVDMWOdg=
 		</data>
-		<key>Resources/TKIconRuby.tiff</key>
-		<data>
-		4Yjbo28yAiwD0ccHqpr9oY6aeuk=
-		</data>
-		<key>Resources/Yellow.tiff</key>
-		<data>
-		IXUOLfJZRsvbW5yVdGm0/UEndk0=
-		</data>
 		<key>Resources/calabash-128x128.tiff</key>
 		<data>
 		Kz0OX1rFgq6ULIZYgqzWTzPF5iY=
-		</data>
-		<key>Resources/down_arrow.png</key>
-		<data>
-		sfuDGj2Zl4NO62o0Ry53E8eRqI8=
 		</data>
 		<key>Resources/en.lproj/Credits.rtf</key>
 		<dict>
@@ -74,22 +50,14 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mXQfx1BFD5fwtYKIPRgjQQ9j3Lc=
+			f1zPPKCtg2g4QPbFp65Hoti/ZkI=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/gnome-terminal.png</key>
-		<data>
-		+S7NsxaHueHWzNIT60mgjdnkkJ0=
-		</data>
 		<key>Resources/llvm-gcc-4.2.zip</key>
 		<data>
 		/MJe8hg3nxrKpFTAUPVfcOdze1g=
-		</data>
-		<key>Resources/power-control.png</key>
-		<data>
-		1NrkXBAB+4BL+Wlh7rxBrAEbDJo=
 		</data>
 		<key>Resources/tokaido-bin.zip</key>
 		<data>
