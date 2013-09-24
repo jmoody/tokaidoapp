@@ -18,6 +18,7 @@
 @property (weak) IBOutlet NSTextField *labelIOSVersion;
 @property (weak) IBOutlet NSTextField *labelAndroidVersion;
 @property (weak) IBOutlet NSTextField *labelApplicationVersion;
+@property (weak) IBOutlet NSTextField *labelBriarVersion;
 
 @property (weak) IBOutlet NSButton *buttonStartTerminal;
 - (IBAction)openTerminalPressed:(id)sender;

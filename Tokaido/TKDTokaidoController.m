@@ -17,6 +17,7 @@
 static NSString *const kCalabashIOSVersion = @"com.xamarin.Calabash - calabash iOS version";
 static NSString *const kCalabashAndroidVersion = @"com.xamarin.Calabash - calabash Android version";
 static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash Ruby version";
+static NSString *const kCalabashBriarVersion = @"com.xamarin.Calabash - calabash briar version";
 
 @interface TKDTokaidoController () <LjsUnixOperationCallbackDelegate>
 
@@ -78,6 +79,7 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
     
     NSString *cal_ios = [gemBin stringByAppendingPathComponent:@"calabash-ios"];
     NSString *cal_and = [gemBin stringByAppendingPathComponent:@"calabash-android"];
+    NSString *briar = [gemBin stringByAppendingPathComponent:@"briar"];
   
     
     NSDictionary *env = @{@"GEM_HOME" : gemDir,
@@ -93,6 +95,12 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
     [self launchVersionOperationWithPath:rubyPath
                               identifier:kCalabashAndroidVersion
                                arguments:@[cal_and, @"version"]
+                             environment:env];
+
+    
+    [self launchVersionOperationWithPath:rubyPath
+                              identifier:kCalabashBriarVersion
+                               arguments:@[briar, @"version"]
                              environment:env];
 
     // punting on this
@@ -132,17 +140,31 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 #pragma mark - Ljs Unix Operation Callback Delegate
 
 - (void) operationCompletedWithName:(NSString *)aName result:(LjsUnixOperationResult *)aResult {
-  
+    /*
+     calabash android returns 711?!?
+    if (aResult.exitCode != 0) {
+        NSLog(@"ERROR: found an error in result");
+        NSLog(@"ERROR: exit code: '%d'", (int)aResult.exitCode);
+        NSLog(@"ERROR: %@", aResult);
+        NSLog(@"ERROR: nothing to do");
+        NSLog(@"ERROR: dropping on the floor");
+        return;
+    }
+     */
+    
     NSTextField *textField = nil;
     if ([kCalabashIOSVersion isEqualToString:aName]) {
-        NSLog(@"DEBUG: reveived IOS version: '%@'", [aResult stdOutput]);
+        NSLog(@"DEBUG: received IOS version: '%@'", [aResult stdOutput]);
         textField = [self labelIOSVersion];
     } else if ([kCalabashAndroidVersion isEqualToString:aName]) {
-        NSLog(@"DEBUG: reveived Android version: '%@'", [aResult stdOutput]);
+        NSLog(@"DEBUG: received Android version: '%@'", [aResult stdOutput]);
         textField = [self labelAndroidVersion];
     } else if ([kCalabashRubyVersion isEqualToString:aName]) {
-        NSLog(@"DEBUG: reveived Ruby version: '%@'", [aResult stdOutput]);
+        NSLog(@"DEBUG: received Ruby version: '%@'", [aResult stdOutput]);
         textField = [self labelRubyVersion];
+    } else if ([kCalabashBriarVersion isEqualToString:aName]) {
+        NSLog(@"DEBUG: received Briar version: '%@'", [aResult stdOutput]);
+        textField = [self labelBriarVersion];
     } else {
         NSLog(@"ERROR: did not recognize operation with name: '%@'", aName);
         NSLog(@"ERROR: dropping result on the floor");

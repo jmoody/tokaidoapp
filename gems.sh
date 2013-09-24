@@ -39,12 +39,17 @@ echo "Removing existing GEM_HOME to rebuild it"
 rm -rf gem_home
 
 echo "Building new GEM_HOME"
-bundle --path gem_home --gemfile Gemfile
+bundle --path gem_home --gemfile Gemfile --standalone
+
+gem install ~/git/calabash-ios/calabash-cucumber/pkg/calabash-cucumber-0.9.158.gem --install-dir $zips/gem_home/ruby/2.0.0
+gem install ~/git/briar/pkg/briar-0.0.9.gem --install-dir $zips/gem_home/ruby/2.0.0
+
 
 gem install bundler -E --no-ri --no-rdoc -i $zips/gem_home/ruby/2.0.0
 
 rm -f tokaido-gems.zip
 rm -rf Gems
 cp -R gem_home/ruby/2.0.0 Gems
+
 
 zip -r tokaido-gems.zip Gems
