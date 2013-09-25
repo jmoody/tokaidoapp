@@ -12,11 +12,13 @@ clear
 # tokaido path => path to the ruby eg. /var/blah/blah/Calabash-XXXX/Ruby
 # tokaido app dir => where to open the shell - always NSUserHomeDirectory
 
+BUNDLER_GEM_DIR=$TOKAIDO_SANDBOX_PATH/Gems/bundler/gems
+
 BIN=$TOKAIDO_SANDBOX_PATH/bin
 
 export TOKAIDO_GEM_HOME=$TOKAIDO_SANDBOX_PATH/Gems
 export GEM_HOME=$TOKAIDO_GEM_HOME
-export GEM_PATH=$TOKAIDO_GEM_HOME
+export GEM_PATH=$TOKAIDO_GEM_HOME:$BUNDLER_GEM_DIR
 export PATH=$BIN:$TOKAIDO_PATH:$GEM_HOME/bin:$PATH
 
 
@@ -34,7 +36,7 @@ do
       continue
   fi
 
-  #echo "INFO: adding ${dir} to path"                                                                                                                                                  
+  #echo "INFO: adding ${dir} to path"
   COMPOSED_PATH="${COMPOSED_PATH}:${dir}"
 
 done

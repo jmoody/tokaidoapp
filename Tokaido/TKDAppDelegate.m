@@ -189,20 +189,21 @@ typedef enum : u_int16_t {
     NSString *rubyVersion = kTKDInstalledRubyVersion;
     
     // First, set up a variable for our ruby installation.
-    NSString *tokaidoSetupStep0 = [NSString stringWithFormat:@"export TOKAIDO_PATH=%@",
+    NSString *exportRubyPath = [NSString stringWithFormat:@"export TOKAIDO_PATH=%@",
                                    [self rubyBinDirectory:rubyVersion]];
     
-    NSString *tokaidoSetupStep1 = [NSString stringWithFormat:@"export TOKAIDO_SANDBOX_PATH=%@",
+    NSString *exportSandboxPath = [NSString stringWithFormat:@"export TOKAIDO_SANDBOX_PATH=%@",
                                    [TKDAppDelegate tokaidoAppSupportDirectory]];
     
     // Second, set up the directory we will cd to
-    NSString *tokaidoSetupStep2 = [NSString stringWithFormat:@"export TOKAIDO_APP_DIR=%@",
+    NSString *exportLaunchDir = [NSString stringWithFormat:@"export TOKAIDO_APP_DIR=%@",
                                    [self sanitizePath:path]];
+    
     
     NSString *tokaidoSetupStep3 = [NSString stringWithFormat:@"source %@/SetupTokaido.sh",
                                    [[NSBundle mainBundle] resourcePath]];
 
-    NSArray *steps = @[tokaidoSetupStep0, tokaidoSetupStep1, tokaidoSetupStep2, tokaidoSetupStep3];
+    NSArray *steps = @[exportRubyPath, exportSandboxPath, exportLaunchDir, tokaidoSetupStep3];
     NSString *stepStr = [steps componentsJoinedByString:@"; "];
     
     // Finally run everything.
