@@ -189,14 +189,14 @@ typedef enum : u_int16_t {
     NSString *rubyVersion = kTKDInstalledRubyVersion;
     
     // First, set up a variable for our ruby installation.
-    NSString *tokaidoSetupStep0 = [NSString stringWithFormat:@"export TOKAIDO_PATH=%@",
+    NSString *tokaidoSetupStep0 = [NSString stringWithFormat:@"export CALABASH_RUBY_PATH=%@",
                                    [self rubyBinDirectory:rubyVersion]];
     
-    NSString *tokaidoSetupStep1 = [NSString stringWithFormat:@"export TOKAIDO_SANDBOX_PATH=%@",
+    NSString *tokaidoSetupStep1 = [NSString stringWithFormat:@"export CALABASH_SANDBOX_PATH=%@",
                                    [TKDAppDelegate tokaidoAppSupportDirectory]];
     
     // Second, set up the directory we will cd to
-    NSString *tokaidoSetupStep2 = [NSString stringWithFormat:@"export TOKAIDO_APP_DIR=%@",
+    NSString *tokaidoSetupStep2 = [NSString stringWithFormat:@"export CALABASH_LAUNCH_DIR=%@",
                                    [self sanitizePath:path]];
     
     NSString *tokaidoSetupStep3 = [NSString stringWithFormat:@"source %@/SetupTokaido.sh",

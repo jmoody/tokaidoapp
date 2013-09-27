@@ -36,6 +36,11 @@ end
 #   end
 # end
 
+
+task :clean do
+ `rm -rf tmp`
+end
+
 #task :default => ["gems:copy", "bootstrap:copy", "bins:copy"]
 #task :default => ["gems:copy", "bootstrap:copy"]
-task :default => ["gems:copy"]
+task :default => ["clean", "gems:copy"]

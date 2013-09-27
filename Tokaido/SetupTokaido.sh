@@ -12,12 +12,12 @@ clear
 # tokaido path => path to the ruby eg. /var/blah/blah/Calabash-XXXX/Ruby
 # tokaido app dir => where to open the shell - always NSUserHomeDirectory
 
-BIN=$TOKAIDO_SANDBOX_PATH/bin
+BIN=$CALABASH_SANDBOX_PATH/bin
 
-export TOKAIDO_GEM_HOME=$TOKAIDO_SANDBOX_PATH/Gems
+export TOKAIDO_GEM_HOME=$CALABASH_SANDBOX_PATH/Gems
 export GEM_HOME=$TOKAIDO_GEM_HOME
 export GEM_PATH=$TOKAIDO_GEM_HOME
-export PATH=$BIN:$TOKAIDO_PATH:$GEM_HOME/bin:$PATH
+export PATH=$BIN:$CALABASH_RUBY_PATH:$GEM_HOME/bin:$PATH
 
 
 for dir in `echo $PATH | sed "s/:/ /g"`
@@ -41,7 +41,7 @@ done
 
 export PATH="${COMPOSED_PATH}"
 
-cd "$TOKAIDO_APP_DIR"
+cd "$CALABASH_LAUNCH_DIR"
 
 echo -e "\033[0;32mThis terminal is now ready use with Calabash.\033[00m"
 echo

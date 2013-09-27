@@ -16,7 +16,8 @@
 
 static NSString *const kCalabashIOSVersion = @"com.xamarin.Calabash - calabash iOS version";
 static NSString *const kCalabashAndroidVersion = @"com.xamarin.Calabash - calabash Android version";
-static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash Ruby version";
+static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - ruby version";
+static NSString *const kCalabashXamarinTestCloudVersion = @"com.xamarin.Calabash - xamarin test cloud version";
 
 @interface TKDTokaidoController () <LjsUnixOperationCallbackDelegate>
 
@@ -78,6 +79,7 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
     
     NSString *cal_ios = [gemBin stringByAppendingPathComponent:@"calabash-ios"];
     NSString *cal_and = [gemBin stringByAppendingPathComponent:@"calabash-android"];
+    NSString *test_cloud = [gemBin stringByAppendingPathComponent:@"test-cloud"];
   
     
     NSDictionary *env = @{@"GEM_HOME" : gemDir,
@@ -94,14 +96,24 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
                               identifier:kCalabashAndroidVersion
                                arguments:@[cal_and, @"version"]
                              environment:env];
+    
+    [self launchVersionOperationWithPath:rubyPath
+                              identifier:kCalabashXamarinTestCloudVersion
+                               arguments:@[test_cloud, @"version"]
+                             environment:env];
 
-    // punting on this
-    // we want to wait for the gems and ruby to report the versions
-    // with some effort i could make this based the return of the NSTasks
-    // but then i would have to spend time handing NSTask errors...
-    // better to let the user touch the button and have the app blow up if it
-    // needs to
-    __weak typeof(self) wself = self;
+    /*** UNEXPECTED ***
+     punting on this
+    
+     we want to wait for the gems and ruby to report the versions.
+     
+     with some effort i could stop the animation and remove the mask _after_
+     all the 'version tasks' had completeed.
+     
+     better (from my POV) to let the user touch the button and have the app
+     blow up if it needs to.
+     ******************/
+     __weak typeof(self) wself = self;
     double delayInSeconds = 1.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -133,16 +145,25 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
 
 - (void) operationCompletedWithName:(NSString *)aName result:(LjsUnixOperationResult *)aResult {
   
+    NSLog(@"DEBUG: received result for '%@'", [aResult commonName]);
+    NSLog(@"DEBUG: with exit code = '%ld'", [aResult exitCode]);
+    if ([aResult exitCode] != 0) {
+        NSLog(@"ERROR: %@", [aResult errOutput]);
+    }
+    
     NSTextField *textField = nil;
     if ([kCalabashIOSVersion isEqualToString:aName]) {
-        NSLog(@"DEBUG: reveived IOS version: '%@'", [aResult stdOutput]);
+        NSLog(@"DEBUG: received IOS version: '%@'", [aResult stdOutput]);
         textField = [self labelIOSVersion];
     } else if ([kCalabashAndroidVersion isEqualToString:aName]) {
-        NSLog(@"DEBUG: reveived Android version: '%@'", [aResult stdOutput]);
+        NSLog(@"DEBUG: received Android version: '%@'", [aResult stdOutput]);
         textField = [self labelAndroidVersion];
     } else if ([kCalabashRubyVersion isEqualToString:aName]) {
-        NSLog(@"DEBUG: reveived Ruby version: '%@'", [aResult stdOutput]);
+        NSLog(@"DEBUG: received Ruby version: '%@'", [aResult stdOutput]);
         textField = [self labelRubyVersion];
+    } else if ([kCalabashXamarinTestCloudVersion isEqualToString:aName]) {
+        NSLog(@"DEBUG: received test cloud version: '%@'", [aResult stdOutput]);
+        textField = [self labelXamTestCloudVersion];
     } else {
         NSLog(@"ERROR: did not recognize operation with name: '%@'", aName);
         NSLog(@"ERROR: dropping result on the floor");
@@ -260,7 +281,9 @@ static NSString *const kCalabashRubyVersion = @"com.xamarin.Calabash - calabash 
     NSString *rev = [[NSBundle mainBundle] objectForInfoDictionaryKey:gitRevKey];
     NSString *ver = [[NSBundle mainBundle] objectForInfoDictionaryKey:versionKey];
     NSString *versionInfo = [NSString stringWithFormat:@"%@ (%@)", ver, rev];
-    [self.labelApplicationVersion setStringValue:versionInfo];
+    
+    NSWindow *win = [self window];
+    win.title = [@"Calabash " stringByAppendingString:versionInfo];
 }
 
 

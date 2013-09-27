@@ -1,4 +1,4 @@
-# Tokaido.app
+# Calabash.app
 
 ## Setup
 
@@ -7,10 +7,13 @@ When first cloning this repo, be sure to run the following:
     1. gem install cocoapods
     2. pod install
     3. bundle install
-    4. bundle exec rake
+    4. bundle exec rake<sup>*</sup>
     5. open Tokaido.xcworkspace
 
-You should then be able to build and run Tokaido in Xcode.
+`*` i am not sure if `bundle exec rake` or `rake` is appropriate.  there is/could be some weirdness around using `bundle` if you have local overrides declared in your `~/.bundle/config` file (like i do).  you have been warned.  see below for some other notes on using `bundle` in the Calabash shell.
+
+You should then be able to build and run Calabash in Xcode.
+
 
 ### how it works
 
@@ -31,7 +34,8 @@ i don't know how to do this.
 3. follow steps 3 and 4 in Setup
 4. build and run the Calabash scheme in Xcode
 
-**IMPORTANT** it is probably a great idea to repeat steps 2 - 3 above when you change branches
+**IMPORTANT** it is probably a great idea to repeat steps 2 - 3 above when you change branches.  i created a rake task `clean` that deletes the `./tmp` directory.
+
 
 ### changing the About view
 
