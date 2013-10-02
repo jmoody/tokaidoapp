@@ -669,7 +669,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -677,6 +677,7 @@
 				INFOPLIST_FILE = "Tokaido/Tokaido-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -686,7 +687,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -694,6 +695,7 @@
 				INFOPLIST_FILE = "Tokaido/Tokaido-Info.plist";
 				INFOPLIST_PREFIX_HEADER = InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

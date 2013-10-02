@@ -43,5 +43,5 @@ export PATH="${COMPOSED_PATH}"
 
 cd "$CALABASH_LAUNCH_DIR"
 
-echo -e "\033[0;32mThis terminal is now ready use with Calabash.\033[00m"
+echo -e "\033[0;32mThis terminal is now ready to use with Calabash.\033[00m"
 echo

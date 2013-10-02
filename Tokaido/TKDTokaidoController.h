@@ -23,6 +23,7 @@
 
 @property (weak) IBOutlet NSButton *buttonStartTerminal;
 - (IBAction)openTerminalPressed:(id)sender;
+- (void) handleDidFinishInstallingSandbox;
 
 
 

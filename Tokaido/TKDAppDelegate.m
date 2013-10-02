@@ -21,7 +21,6 @@ static NSString * const kTokaidoBootstrapFirewallPlistScriptString = @"TOKAIDO_F
 // tokaido-bootstrap label
 static NSString * const kTokaidoBootstrapLabel = @"io.tilde.tokaido.bootstrap";
 
-NSString *const TKDDidFinishInstallingSandboxNotification = @"com.xamarin.Calabash NOTIFICATION finished installing sandbox";
 NSString *const kTKDInstalledRubyVersion = @"2.0.0-p195";
 
 typedef enum : u_int16_t {
@@ -136,13 +135,22 @@ typedef enum : u_int16_t {
               inDirectoryPath:[TKDAppDelegate tokaidoAppSupportDirectory]];
     }
     
-//    double delayInSeconds = 10.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:TKDDidFinishInstallingSandboxNotification object:nil];
+    
+    /*** UNEXPECTED ***
+     [[NSNotificationCenter defaultCenter]
+     postNotificationName:TKDDidFinishInstallingSandboxNotification object:nil];
 
-//    });
+     the unzip gem task is SYNCHRONOUS so we can handle launching the find-version
+     NSOperations with a method rather than a notification
+     
+     *****************/
+    
+    if (self.tokaidoController == nil) {
+        NSLog(@"ERROR: the controller is nil");
+        return;
+    }
+    
+    [self.tokaidoController handleDidFinishInstallingSandbox];
 }
 
 
@@ -325,12 +333,13 @@ typedef enum : u_int16_t {
 #pragma mark start/stop tokaido-bootstrap
 
 
-- (void)stopTokaidoBootstrap
-{
-    NSLog(@"tokaido-bootstrap shutting down...");
-    SMJobRemove(kSMDomainUserLaunchd, (__bridge CFStringRef)kTokaidoBootstrapLabel, NULL, false, NULL);
-}
 
+//- (void)stopTokaidoBootstrap
+//{
+//    NSLog(@"tokaido-bootstrap shutting down...");
+//    SMJobRemove(kSMDomainUserLaunchd, (__bridge CFStringRef)kTokaidoBootstrapLabel, NULL, false, NULL);
+//}
+//
 
 #pragma mark Helpers
 

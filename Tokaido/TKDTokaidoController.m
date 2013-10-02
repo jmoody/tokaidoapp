@@ -25,7 +25,6 @@ static NSString *const kCalabashXamarinTestCloudVersion = @"com.xamarin.Calabash
 @property (nonatomic, strong, readonly) NSView *mask;
 @property (nonatomic, strong, readonly) NSProgressIndicator *progressIndicator;
 
-- (void) handleDidFinishInstallingSandboxNotification:(NSNotification *) aNotification;
 
 - (void) launchVersionOperationWithPath:(NSString *) aLaunchPath
                              identifier:(NSString *) aIdentifer
@@ -44,11 +43,7 @@ static NSString *const kCalabashXamarinTestCloudVersion = @"com.xamarin.Calabash
 - (id) initWithWindow:(NSWindow *)window {
     self = [super initWithWindow:window];
     if (self) {
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self
-         selector:@selector(handleDidFinishInstallingSandboxNotification:)
-         name:TKDDidFinishInstallingSandboxNotification
-         object:nil];
+       
     }
     return self;
 }
@@ -59,10 +54,8 @@ static NSString *const kCalabashXamarinTestCloudVersion = @"com.xamarin.Calabash
     return _opqueue;
 }
 
-- (void) handleDidFinishInstallingSandboxNotification:(NSNotification *) aNotification {
-    NSLog(@"DEBUG: received sandbox did finish install notification");
-    [[NSNotificationCenter defaultCenter]
-     removeObserver:self name:TKDDidFinishInstallingSandboxNotification object:nil];
+- (void) handleDidFinishInstallingSandbox {
+    NSLog(@"DEBUG: sandbox did finish installing");
 
     NSString *rubyDir = [TKDAppDelegate tokaidoInstalledRubiesDirectory];
     NSString *rubySub = [NSString stringWithFormat:@"%@/bin/ruby", kTKDInstalledRubyVersion];
@@ -103,7 +96,6 @@ static NSString *const kCalabashXamarinTestCloudVersion = @"com.xamarin.Calabash
                              environment:env];
 
     /*** UNEXPECTED ***
-     punting on this
     
      we want to wait for the gems and ruby to report the versions.
      
@@ -112,11 +104,19 @@ static NSString *const kCalabashXamarinTestCloudVersion = @"com.xamarin.Calabash
      
      better (from my POV) to let the user touch the button and have the app
      blow up if it needs to.
+     
+     put another way - we ALWAYS want the mask and progress indicator to be 
+     removed, regardless of whether or not the version tasks complete
+     
+     NB: the bulk of launch time is spent unzipping the gems to the tmp directory
+     
+     1.0 is about the minimum for all the gems to report back
      ******************/
      __weak typeof(self) wself = self;
-    double delayInSeconds = 1.5;
+    double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSLog(@"DEBUG: removing progress indicator and mask");
         NSProgressIndicator *pi = [wself progressIndicator];
         [pi stopAnimation:nil];
         NSView *mask = [wself mask];
@@ -131,6 +131,7 @@ static NSString *const kCalabashXamarinTestCloudVersion = @"com.xamarin.Calabash
                              identifier:(NSString *) aIdentifer
                               arguments:(NSArray *) aArgs
                             environment:(NSDictionary *) aEnvironment {
+    NSLog(@"launching version operation: '%@'", aIdentifer);
     LjsUnixOperation *operation = [[LjsUnixOperation alloc]
                                    initWithLaunchPath:aLaunchPath
                                    launchArgs:aArgs
