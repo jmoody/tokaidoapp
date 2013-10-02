@@ -22,7 +22,6 @@
 
 /* Begin PBXBuildFile section */
 		08783A2A1784A9AC0071AC1C /* uninstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = 08783A291784A9AC0071AC1C /* uninstall.sh */; };
-		089C2B971776194D001530DF /* tokaido-bin.zip in Resources */ = {isa = PBXBuildFile; fileRef = 089C2B961776194D001530DF /* tokaido-bin.zip */; };
 		08A60A6517564F7900197C27 /* 2.0.0-p195.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08A60A6317564F6A00197C27 /* 2.0.0-p195.zip */; };
 		2ED0D0CF3BDF47DBAFB3E8FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7523D448445F475BB439A142 /* libPods.a */; };
 		3A19ECCD163F5B5C0035ABA2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A19ECCC163F5B5C0035ABA2 /* Security.framework */; };
@@ -51,10 +50,8 @@
 		CD5A8980171380A600217D8A /* TKDEditAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5A897F171380A500217D8A /* TKDEditAppController.m */; };
 		CD5A8982171380E500217D8A /* EditAppWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD5A8981171380E500217D8A /* EditAppWindow.xib */; };
 		CD5A898A1714F0AC00217D8A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5A89891714F0AC00217D8A /* Quartz.framework */; };
-		CD5A898E171CC96000217D8A /* tokaido-bootstrap.zip in Resources */ = {isa = PBXBuildFile; fileRef = CD5A898D171CC96000217D8A /* tokaido-bootstrap.zip */; };
 		CD8285A916559A9D000CB252 /* TKDRailsAppTokenField.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8285A816559A9D000CB252 /* TKDRailsAppTokenField.m */; };
 		CD8285DF1655B7DF000CB252 /* TKDAppCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8285DD1655B670000CB252 /* TKDAppCollectionView.m */; };
-		CDA9B856172B42E30027E78B /* llvm-gcc-4.2.zip in Resources */ = {isa = PBXBuildFile; fileRef = CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */; };
 		CDB963F617288901002A8A43 /* tokaido-gems.zip in Resources */ = {isa = PBXBuildFile; fileRef = CDB963F517288901002A8A43 /* tokaido-gems.zip */; };
 		F5D1B19E17F07DD100A180A5 /* LjsUnixOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D1B19917F07DD100A180A5 /* LjsUnixOperation.m */; };
 		F5D1B19F17F07DD100A180A5 /* LjsUnixOperationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D1B19B17F07DD100A180A5 /* LjsUnixOperationResult.m */; };
@@ -471,10 +468,7 @@
 				08783A2A1784A9AC0071AC1C /* uninstall.sh in Resources */,
 				F5ED7EA517EF277700F492BF /* Calabash.icns in Resources */,
 				CD5A8982171380E500217D8A /* EditAppWindow.xib in Resources */,
-				CD5A898E171CC96000217D8A /* tokaido-bootstrap.zip in Resources */,
 				CDB963F617288901002A8A43 /* tokaido-gems.zip in Resources */,
-				CDA9B856172B42E30027E78B /* llvm-gcc-4.2.zip in Resources */,
-				089C2B971776194D001530DF /* tokaido-bin.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
