@@ -1303,7 +1303,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="172100256">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">installing...</string>
+								<string key="NSContents">2.0.0p195</string>
 								<object class="NSFont" key="NSSupport" id="254298430">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
@@ -1345,7 +1345,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="1063360730">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">installing...</string>
+								<string key="NSContents">0.9.158</string>
 								<reference key="NSSupport" ref="254298430"/>
 								<string key="NSCellIdentifier">_NS:397</string>
 								<reference key="NSControlView" ref="732624779"/>
@@ -1367,7 +1367,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="819889045">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">installing...</string>
+								<string key="NSContents">0.4.14</string>
 								<reference key="NSSupport" ref="254298430"/>
 								<string key="NSCellIdentifier">_NS:397</string>
 								<reference key="NSControlView" ref="300591045"/>
@@ -1382,14 +1382,14 @@
 							<string key="NSFrame">{{160, 38}, {92, 17}}</string>
 							<reference key="NSSuperview" ref="329701661"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
+							<reference key="NSNextKeyView" ref="44279740"/>
 							<string key="NSReuseIdentifierKey">_NS:397</string>
 							<string key="NSHuggingPriority">{251, 750}</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="87295034">
 								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">installing...</string>
+								<string key="NSContents">0.9.25</string>
 								<reference key="NSSupport" ref="254298430"/>
 								<string key="NSCellIdentifier">_NS:397</string>
 								<reference key="NSControlView" ref="529733354"/>
@@ -3272,7 +3272,6 @@
 							<reference ref="582508075"/>
 							<reference ref="700018739"/>
 							<reference ref="814234593"/>
-							<reference ref="732624779"/>
 							<reference ref="300591045"/>
 							<reference ref="44279740"/>
 							<reference ref="111529399"/>
@@ -3771,6 +3770,7 @@
 								<bool key="placeholder">NO</bool>
 							</object>
 							<reference ref="471916890"/>
+							<reference ref="732624779"/>
 							<reference ref="529733354"/>
 						</array>
 						<reference key="parent" ref="998915035"/>
@@ -4161,23 +4161,23 @@
 						<reference key="parent" ref="329701661"/>
 					</object>
 					<object class="IBObjectRecord">
-						<string key="id">PMC-jG-9J7</string>
-						<reference key="object" ref="309946033"/>
-						<reference key="parent" ref="329701661"/>
-					</object>
-					<object class="IBObjectRecord">
-						<string key="id">m2P-O9-ho3</string>
-						<reference key="object" ref="708550252"/>
-						<reference key="parent" ref="329701661"/>
-					</object>
-					<object class="IBObjectRecord">
 						<string key="id">tXt-np-4Ls</string>
 						<reference key="object" ref="485053549"/>
 						<reference key="parent" ref="329701661"/>
 					</object>
 					<object class="IBObjectRecord">
+						<string key="id">PMC-jG-9J7</string>
+						<reference key="object" ref="309946033"/>
+						<reference key="parent" ref="329701661"/>
+					</object>
+					<object class="IBObjectRecord">
 						<string key="id">v8Z-02-rZ3</string>
 						<reference key="object" ref="767840499"/>
+						<reference key="parent" ref="329701661"/>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">m2P-O9-ho3</string>
+						<reference key="object" ref="708550252"/>
 						<reference key="parent" ref="329701661"/>
 					</object>
 				</array>

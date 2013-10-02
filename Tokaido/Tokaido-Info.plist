@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.0.2</string>
+	<string>0.0.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>0.0.4</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.developer-tools</string>
 	<key>LSMinimumSystemVersion</key>
@@ -32,11 +32,6 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SMPrivilegedExecutables</key>
-	<dict>
-		<key>io.tilde.tokaido-bootstrap</key>
-		<string>identifier io.tilde.tokaido-bootstrap and certificate leaf[subject.CN] = "Developer ID Application: Tilde Inc."</string>
-	</dict>
 	<key>XAMGitBranch</key>
 	<string>GIT_BRANCH</string>
 	<key>XAMGitShortRevision</key>
