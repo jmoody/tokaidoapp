@@ -42,16 +42,34 @@ typedef enum : u_int16_t {
 
 - (NSString *) calabashDirUUID {
     if (_calabashDirUUID != nil) { return _calabashDirUUID; }
-    _calabashDirUUID =  [[NSUUID UUID] UUIDString];
+    NSString *udid = nil;
+    if (NSClassFromString(@"NSUUID") == nil) {
+        CFUUIDRef newUniqueId = CFUUIDCreate(kCFAllocatorDefault);
+        udid = (__bridge_transfer NSString*)CFUUIDCreateString(kCFAllocatorDefault, newUniqueId);
+        CFRelease(newUniqueId);
+    } else {
+        udid = [[NSUUID UUID] UUIDString];
+    }
+    
+    _calabashDirUUID = udid;
     return _calabashDirUUID;
 }
 
 - (NSString *) pathToSandbox {
     if (_pathToSandbox != nil) { return _pathToSandbox; }
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    if (appName == nil || [appName length] == 0) { appName = @"Calabash"; }
     NSString *tmpDir = NSTemporaryDirectory();
-    if (tmpDir == nil) { tmpDir = @"/tmp"; }
-    NSString *subdir = [NSString stringWithFormat:@"%@-%@", appName, [self calabashDirUUID]];
+    if (tmpDir == nil || [tmpDir length] == 0) { tmpDir = @"/tmp"; }
+    NSString *udid = [self calabashDirUUID];
+
+    NSString *subdir;
+    if (udid == nil || [udid length] == 0) {
+        subdir = appName;
+    } else {
+        subdir = [NSString stringWithFormat:@"%@-%@", appName, [self calabashDirUUID]];
+    }
+    
     NSString *workspaceDir = [tmpDir stringByAppendingPathComponent:subdir];
     _pathToSandbox = workspaceDir;
     return _pathToSandbox;
