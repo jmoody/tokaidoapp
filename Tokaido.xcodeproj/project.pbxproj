@@ -351,11 +351,6 @@
 				LastTestingUpgradeCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Tilde;
-				TargetAttributes = {
-					3AD6930616373C9F005AF81E = {
-						DevelopmentTeam = 7V723M9SQ5;
-					};
-				};
 			};
 			buildConfigurationList = 3AD6930116373C9F005AF81E /* Build configuration list for PBXProject "Tokaido" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -547,8 +542,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer: Karl Krukow (L4RX672NW7)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Karl Krukow (L4RX672NW7)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -568,8 +561,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 49197744598E013EBA286EAD /* Pods.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer: Karl Krukow (L4RX672NW7)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Karl Krukow (L4RX672NW7)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
