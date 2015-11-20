@@ -23,7 +23,6 @@
 /* Begin PBXBuildFile section */
 		08783A2A1784A9AC0071AC1C /* uninstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = 08783A291784A9AC0071AC1C /* uninstall.sh */; };
 		08A60A6517564F7900197C27 /* 2.0.0-p195.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08A60A6317564F6A00197C27 /* 2.0.0-p195.zip */; };
-		2ED0D0CF3BDF47DBAFB3E8FC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7523D448445F475BB439A142 /* libPods.a */; };
 		3A19ECCD163F5B5C0035ABA2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A19ECCC163F5B5C0035ABA2 /* Security.framework */; };
 		3A19ECCF163F5B610035ABA2 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A19ECCE163F5B610035ABA2 /* ServiceManagement.framework */; };
 		3AD6930C16373C9F005AF81E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD6930B16373C9F005AF81E /* Cocoa.framework */; };
@@ -91,8 +90,6 @@
 		3AD69349163746B7005AF81E /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
 		3AD6934A16374795005AF81E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		3AD6934C16374989005AF81E /* SetupTokaido.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SetupTokaido.sh; sourceTree = "<group>"; };
-		49197744598E013EBA286EAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7523D448445F475BB439A142 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5A89891714F0AC00217D8A /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		CD5A898D171CC96000217D8A /* tokaido-bootstrap.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "tokaido-bootstrap.zip"; sourceTree = "<group>"; };
@@ -113,7 +110,6 @@
 				3A19ECCD163F5B5C0035ABA2 /* Security.framework in Frameworks */,
 				3AD6934B16374795005AF81E /* ScriptingBridge.framework in Frameworks */,
 				3AD6930C16373C9F005AF81E /* Cocoa.framework in Frameworks */,
-				2ED0D0CF3BDF47DBAFB3E8FC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +123,6 @@
 				3AD6931116373C9F005AF81E /* Tokaido */,
 				3AD6930A16373C9F005AF81E /* Frameworks */,
 				3AD6930816373C9F005AF81E /* Products */,
-				6DD7EECD42738930FF7B1BBD /* Pods */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -227,15 +222,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		6DD7EECD42738930FF7B1BBD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */,
-				49197744598E013EBA286EAD /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		CD1FCB86169D047B00FB7E36 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,8 +248,6 @@
 				3AD6930416373C9F005AF81E /* Frameworks */,
 				3AD6930516373C9F005AF81E /* Resources */,
 				3AD6935116375C8F005AF81E /* CopyFiles */,
-				19D09BFA9B9E4F4F9E39E605 /* Copy Pods Resources */,
-				3D335F04EC1C578976CBC5FD /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -324,35 +308,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		19D09BFA9B9E4F4F9E39E605 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-		};
-		3D335F04EC1C578976CBC5FD /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F5D1B1B517F0C0F900A180A5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -472,16 +427,18 @@
 		};
 		3AD6933A16373C9F005AF81E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tokaido/Tokaido-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Tokaido/Tokaido-Info.plist";
 				INFOPLIST_PREFIX_HEADER = Tokaido/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = sh.calaba.Calabash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -491,16 +448,18 @@
 		};
 		3AD6933B16373C9F005AF81E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49197744598E013EBA286EAD /* Pods.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPYING_PRESERVES_HFS_DATA = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tokaido/Tokaido-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Tokaido/Tokaido-Info.plist";
 				INFOPLIST_PREFIX_HEADER = Tokaido/InfoPlist.h;
 				INFOPLIST_PREPROCESS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = sh.calaba.Calabash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
