@@ -1,7 +1,5 @@
 #import "TKDAppDelegate.h"
 #import "TKDTokaidoController.h"
-#import "TKDMuxrManager.h"
-#import "TKDApp.h"
 
 @interface TKDTokaidoController ()
 

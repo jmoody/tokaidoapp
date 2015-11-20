@@ -35,8 +35,6 @@
 		3AD693451637436E005AF81E /* TKDTokaidoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD693441637436E005AF81E /* TKDTokaidoController.m */; };
 		3AD6934B16374795005AF81E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD6934A16374795005AF81E /* ScriptingBridge.framework */; };
 		3AD6934D16374989005AF81E /* SetupTokaido.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3AD6934C16374989005AF81E /* SetupTokaido.sh */; };
-		3AD694E21639F9D5005AF81E /* TKDAppViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD694E11639F9D5005AF81E /* TKDAppViewItem.xib */; };
-		CD5A8982171380E500217D8A /* EditAppWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD5A8981171380E500217D8A /* EditAppWindow.xib */; };
 		CD5A898A1714F0AC00217D8A /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD5A89891714F0AC00217D8A /* Quartz.framework */; };
 		CDB963F617288901002A8A43 /* tokaido-gems.zip in Resources */ = {isa = PBXBuildFile; fileRef = CDB963F517288901002A8A43 /* tokaido-gems.zip */; };
 		F5D1B1A217F0911200A180A5 /* calabash-128x128@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D1B1A117F0911200A180A5 /* calabash-128x128@2x.png */; };
@@ -73,8 +71,6 @@
 		08A60A6317564F6A00197C27 /* 2.0.0-p195.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "2.0.0-p195.zip"; sourceTree = "<group>"; };
 		3A19ECCC163F5B5C0035ABA2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A19ECCE163F5B610035ABA2 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		3A19ECE416406F5B0035ABA2 /* TKDSelectableIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDSelectableIcon.h; sourceTree = "<group>"; };
-		3A19ECE516406F5B0035ABA2 /* TKDSelectableIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDSelectableIcon.m; sourceTree = "<group>"; };
 		3AD6930716373C9F005AF81E /* Calabash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calabash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD6930B16373C9F005AF81E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		3AD6930E16373C9F005AF81E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -95,29 +91,11 @@
 		3AD69349163746B7005AF81E /* Terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terminal.h; sourceTree = "<group>"; };
 		3AD6934A16374795005AF81E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		3AD6934C16374989005AF81E /* SetupTokaido.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SetupTokaido.sh; sourceTree = "<group>"; };
-		3AD694E11639F9D5005AF81E /* TKDAppViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TKDAppViewItem.xib; sourceTree = "<group>"; };
-		3AD694E4163A1475005AF81E /* TKDApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDApp.h; sourceTree = "<group>"; };
-		3AD694E5163A1475005AF81E /* TKDApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDApp.m; sourceTree = "<group>"; };
-		3AD69507163B4093005AF81E /* TKDAppViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDAppViewItem.h; sourceTree = "<group>"; };
-		3AD69508163B4093005AF81E /* TKDAppViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDAppViewItem.m; sourceTree = "<group>"; };
 		49197744598E013EBA286EAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7523D448445F475BB439A142 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C545BDB9178346D900DACCBD /* TKDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDTask.h; sourceTree = "<group>"; };
-		C545BDBA178346D900DACCBD /* TKDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDTask.m; sourceTree = "<group>"; };
-		C5E21F8117882F94002B24B5 /* TKDAppViewItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDAppViewItemView.h; sourceTree = "<group>"; };
-		C5E21F8217882F94002B24B5 /* TKDAppViewItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDAppViewItemView.m; sourceTree = "<group>"; };
-		CD5A8935170CC4E800217D8A /* TKDMuxrManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDMuxrManager.h; sourceTree = "<group>"; };
-		CD5A8936170CC4E900217D8A /* TKDMuxrManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDMuxrManager.m; sourceTree = "<group>"; };
-		CD5A897E171380A500217D8A /* TKDEditAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDEditAppController.h; sourceTree = "<group>"; };
-		CD5A897F171380A500217D8A /* TKDEditAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDEditAppController.m; sourceTree = "<group>"; };
-		CD5A8981171380E500217D8A /* EditAppWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditAppWindow.xib; sourceTree = "<group>"; };
 		CD5A89891714F0AC00217D8A /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		CD5A898D171CC96000217D8A /* tokaido-bootstrap.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "tokaido-bootstrap.zip"; sourceTree = "<group>"; };
-		CD8285A716559A9D000CB252 /* TKDRailsAppTokenField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDRailsAppTokenField.h; sourceTree = "<group>"; };
-		CD8285A816559A9D000CB252 /* TKDRailsAppTokenField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDRailsAppTokenField.m; sourceTree = "<group>"; };
-		CD8285DC1655B670000CB252 /* TKDAppCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDAppCollectionView.h; sourceTree = "<group>"; };
-		CD8285DD1655B670000CB252 /* TKDAppCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDAppCollectionView.m; sourceTree = "<group>"; };
 		CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "llvm-gcc-4.2.zip"; sourceTree = "<group>"; };
 		CDB963F517288901002A8A43 /* tokaido-gems.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "tokaido-gems.zip"; sourceTree = "<group>"; };
 		F5D1B1A117F0911200A180A5 /* calabash-128x128@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calabash-128x128@2x.png"; sourceTree = "<group>"; };
@@ -191,7 +169,6 @@
 		3AD6931116373C9F005AF81E /* Tokaido */ = {
 			isa = PBXGroup;
 			children = (
-				F5B727D017F0DA7E008B4F6D /* NOT USED */,
 				3AD6931D16373C9F005AF81E /* TKDAppDelegate.h */,
 				3AD6931E16373C9F005AF81E /* TKDAppDelegate.m */,
 				3AD693431637436E005AF81E /* TKDTokaidoController.h */,
@@ -240,24 +217,6 @@
 			name = "Ruby Bundles";
 			sourceTree = "<group>";
 		};
-		3AD6935B1639C6FE005AF81E /* Custom Views */ = {
-			isa = PBXGroup;
-			children = (
-				CD8285DC1655B670000CB252 /* TKDAppCollectionView.h */,
-				CD8285DD1655B670000CB252 /* TKDAppCollectionView.m */,
-				3AD694E11639F9D5005AF81E /* TKDAppViewItem.xib */,
-				3AD69507163B4093005AF81E /* TKDAppViewItem.h */,
-				3AD69508163B4093005AF81E /* TKDAppViewItem.m */,
-				C5E21F8117882F94002B24B5 /* TKDAppViewItemView.h */,
-				C5E21F8217882F94002B24B5 /* TKDAppViewItemView.m */,
-				3A19ECE416406F5B0035ABA2 /* TKDSelectableIcon.h */,
-				3A19ECE516406F5B0035ABA2 /* TKDSelectableIcon.m */,
-				CD8285A716559A9D000CB252 /* TKDRailsAppTokenField.h */,
-				CD8285A816559A9D000CB252 /* TKDRailsAppTokenField.m */,
-			);
-			name = "Custom Views";
-			sourceTree = "<group>";
-		};
 		3AD694DC1639E905005AF81E /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,15 +225,6 @@
 				CD1FCB86169D047B00FB7E36 /* Icon */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		3AD694E3163A1457005AF81E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				3AD694E4163A1475005AF81E /* TKDApp.h */,
-				3AD694E5163A1475005AF81E /* TKDApp.m */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		6DD7EECD42738930FF7B1BBD /* Pods */ = {
@@ -292,22 +242,6 @@
 				F5ED7EA417EF277700F492BF /* Calabash.icns */,
 			);
 			name = Icon;
-			sourceTree = "<group>";
-		};
-		F5B727D017F0DA7E008B4F6D /* NOT USED */ = {
-			isa = PBXGroup;
-			children = (
-				CD5A8935170CC4E800217D8A /* TKDMuxrManager.h */,
-				CD5A8936170CC4E900217D8A /* TKDMuxrManager.m */,
-				CD5A897E171380A500217D8A /* TKDEditAppController.h */,
-				CD5A897F171380A500217D8A /* TKDEditAppController.m */,
-				CD5A8981171380E500217D8A /* EditAppWindow.xib */,
-				C545BDB9178346D900DACCBD /* TKDTask.h */,
-				C545BDBA178346D900DACCBD /* TKDTask.m */,
-				3AD694E3163A1457005AF81E /* Model */,
-				3AD6935B1639C6FE005AF81E /* Custom Views */,
-			);
-			name = "NOT USED";
 			sourceTree = "<group>";
 		};
 		F5D1B19617F07DBF00A180A5 /* ThirdParty */ = {
@@ -380,11 +314,9 @@
 				3AD6931C16373C9F005AF81E /* Credits.rtf in Resources */,
 				3AD6932216373C9F005AF81E /* MainMenu.xib in Resources */,
 				3AD6934D16374989005AF81E /* SetupTokaido.sh in Resources */,
-				3AD694E21639F9D5005AF81E /* TKDAppViewItem.xib in Resources */,
 				F5D1B1A217F0911200A180A5 /* calabash-128x128@2x.png in Resources */,
 				08783A2A1784A9AC0071AC1C /* uninstall.sh in Resources */,
 				F5ED7EA517EF277700F492BF /* Calabash.icns in Resources */,
-				CD5A8982171380E500217D8A /* EditAppWindow.xib in Resources */,
 				CDB963F617288901002A8A43 /* tokaido-gems.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
