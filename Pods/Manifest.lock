@@ -8,10 +8,10 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.3)
   - LibYAML (0.1.4)
-  - Mantle (1.0):
-    - libextobjc/EXTKeyPathCoding
-    - libextobjc/EXTScope
-  - YAML-Framework (0.0.1):
+  - Mantle (1.5.6):
+    - Mantle/extobjc (= 1.5.6)
+  - Mantle/extobjc (1.5.6)
+  - YAML-Framework (0.0.2):
     - LibYAML (~> 0.1.4)
 
 DEPENDENCIES:
@@ -27,11 +27,16 @@ EXTERNAL SOURCES:
     :branch: socketUN
     :git: https://github.com/tokaido/CocoaAsyncSocket
 
-SPEC CHECKSUMS:
-  CocoaAsyncSocket: 38c3fed179d70e2de3d82eb19028ef8d47fec6d4
-  libextobjc: 820a79dbbbc498611e04fffd07d2d52a5588e7ac
-  LibYAML: 49b77e5b3f4417fa512a8f1f4675a78480bf6b3d
-  Mantle: aa9860e40cc365a094ef60fec46848fee7b03ca7
-  YAML-Framework: 4ada9225119ffb13a206f251fe4434e660bca16d
+CHECKOUT OPTIONS:
+  CocoaAsyncSocket:
+    :commit: f2c0952e3c24e9221ef8c2dc87e30b3051846fe9
+    :git: https://github.com/tokaido/CocoaAsyncSocket
 
-COCOAPODS: 0.25.0
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: 7bf3f5279a848f62f39a22b78785e0298905053f
+  libextobjc: 34cd4e77070160a3fa910db193e1e194e8591aa2
+  LibYAML: 3af2c5adf3a40dff936d087aa6a77edc10036bc5
+  Mantle: a197db93e0f1e36194b1fdbc078219a8492eaef2
+  YAML-Framework: 6fe698e19d39d778829f5937e39d1e6bc12afd7b
+
+COCOAPODS: 0.39.0

@@ -116,6 +116,8 @@
 		3AD694E5163A1475005AF81E /* TKDApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDApp.m; sourceTree = "<group>"; };
 		3AD69507163B4093005AF81E /* TKDAppViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDAppViewItem.h; sourceTree = "<group>"; };
 		3AD69508163B4093005AF81E /* TKDAppViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDAppViewItem.m; sourceTree = "<group>"; };
+		49197744598E013EBA286EAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7523D448445F475BB439A142 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C545BDB9178346D900DACCBD /* TKDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDTask.h; sourceTree = "<group>"; };
 		C545BDBA178346D900DACCBD /* TKDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDTask.m; sourceTree = "<group>"; };
@@ -134,7 +136,6 @@
 		CD8285DD1655B670000CB252 /* TKDAppCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDAppCollectionView.m; sourceTree = "<group>"; };
 		CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "llvm-gcc-4.2.zip"; sourceTree = "<group>"; };
 		CDB963F517288901002A8A43 /* tokaido-gems.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "tokaido-gems.zip"; sourceTree = "<group>"; };
-		E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		F5D1B1A117F0911200A180A5 /* calabash-128x128@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calabash-128x128@2x.png"; sourceTree = "<group>"; };
 		F5D1B1A317F0911A00A180A5 /* calabash-128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calabash-128x128.png"; sourceTree = "<group>"; };
 		F5ED7EA417EF277700F492BF /* Calabash.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Calabash.icns; path = ../Calabash.icns; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 				3AD6932E16373C9F005AF81E /* TokaidoTests */,
 				3AD6930A16373C9F005AF81E /* Frameworks */,
 				3AD6930816373C9F005AF81E /* Products */,
+				6DD7EECD42738930FF7B1BBD /* Pods */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -233,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				08783A291784A9AC0071AC1C /* uninstall.sh */,
-				E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */,
 				3AD69347163746A8005AF81E /* ScriptingBridge */,
 				3AD6934C16374989005AF81E /* SetupTokaido.sh */,
 				3AD6931316373C9F005AF81E /* Tokaido-Info.plist */,
@@ -322,6 +323,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		6DD7EECD42738930FF7B1BBD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */,
+				49197744598E013EBA286EAD /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CD1FCB86169D047B00FB7E36 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +375,7 @@
 				3AD6930516373C9F005AF81E /* Resources */,
 				3AD6935116375C8F005AF81E /* CopyFiles */,
 				19D09BFA9B9E4F4F9E39E605 /* Copy Pods Resources */,
+				3D335F04EC1C578976CBC5FD /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,7 +404,7 @@
 			name = TokaidoTests;
 			productName = TokaidoTests;
 			productReference = 3AD6932816373C9F005AF81E /* TokaidoTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -471,7 +482,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
 		3AD6932616373C9F005AF81E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -485,6 +496,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		3D335F04EC1C578976CBC5FD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		F5D1B1B517F0C0F900A180A5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -625,7 +651,7 @@
 		};
 		3AD6933A16373C9F005AF81E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
+			baseConfigurationReference = 60C52D5F803F069C21F78E0C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer: Karl Krukow (L4RX672NW7)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Karl Krukow (L4RX672NW7)";
@@ -645,7 +671,7 @@
 		};
 		3AD6933B16373C9F005AF81E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4032CA2B44246FFAF8D38DF /* Pods.xcconfig */;
+			baseConfigurationReference = 49197744598E013EBA286EAD /* Pods.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer: Karl Krukow (L4RX672NW7)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: Karl Krukow (L4RX672NW7)";
