@@ -91,7 +91,6 @@
 		3AD6934C16374989005AF81E /* SetupTokaido.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SetupTokaido.sh; sourceTree = "<group>"; };
 		7523D448445F475BB439A142 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD5A89891714F0AC00217D8A /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
-		CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "llvm-gcc-4.2.zip"; sourceTree = "<group>"; };
 		CDB963F517288901002A8A43 /* tokaido-gems.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "tokaido-gems.zip"; sourceTree = "<group>"; };
 		F5D1B1A117F0911200A180A5 /* calabash-128x128@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calabash-128x128@2x.png"; sourceTree = "<group>"; };
 		F5D1B1A317F0911A00A180A5 /* calabash-128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calabash-128x128.png"; sourceTree = "<group>"; };
@@ -202,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				08A60A6317564F6A00197C27 /* 2.0.0-p195.zip */,
-				CDA9B855172B42E30027E78B /* llvm-gcc-4.2.zip */,
 				CDB963F517288901002A8A43 /* tokaido-gems.zip */,
 			);
 			name = "Ruby Bundles";
